@@ -32,7 +32,7 @@ export const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10"
+      className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10 mt-10 md:mt-2"
     >
       <motion.div
         className="container max-w-7xl mx-auto z-10"
@@ -40,7 +40,7 @@ export const HeroSection = () => {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <div className="flex flex-col md:flex-row items-center justify-between gap-10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-2">
           <div className="text-center md:text-left flex-1 space-y-6">
             <motion.h1
               variants={fadeUp}
