@@ -75,10 +75,6 @@
     --border: 214 32% 91%;
   }
 
-  body {
-  overflow-x: hidden;
-}
-
   .dark {
     --background: 222 47% 4%;
     --foreground: 213 31% 91%;
