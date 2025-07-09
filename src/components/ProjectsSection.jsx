@@ -36,6 +36,16 @@ const projects = [
   },
   {
     id: 4,
+    title: "SpaceX",
+    description: "The SpaceX Landing Page is a visually captivating and modern front-end project that showcases the cutting-edge identity of SpaceX. ",
+    image: "/projects/project7.png",
+    tags: ["React", "Tailwind", "Frontend"],
+    demoUrl: "#",
+    githubUrl: "#",
+    type: "webapp"
+  },
+  {
+    id: 5,
     title: "UrbanNext",
     description: "UrbanNext is a modern and intuitive user interface designed for seamless real estate experiences. Whether you're looking to buy or sell plots, houses, or flats, UrbanNext provides a user-friendly platform with clean design and smooth navigation.",
     image: "/projects/project4.png",
@@ -44,7 +54,7 @@ const projects = [
     type: "uiux"
   },
   {
-    id: 5,
+    id: 6,
     title: "Avadh Foods App",
     description: "Avadh Foods is a sleek and user-friendly mobile/web app designed to deliver a seamless food ordering experience. Inspired by platforms like Zomato and Swiggy, explore menus, and order delicious meals directly to their doorstep.",
     image: "/projects/project5.png",
@@ -53,7 +63,7 @@ const projects = [
     type: "uiux"
   },
   {
-    id: 6,
+    id: 7,
     title: "ARTseller",
     description: "ARTseller is a creative and elegant platform built for artists and art lovers. It enables users to buy, sell, and showcase unique artwork, ranging from paintings and illustrations to digital art and handmade crafts.",
     image: "/projects/project6.png",
