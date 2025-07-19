@@ -1,4 +1,5 @@
 import { StarBackground } from "@/components/StarBackground";
+import { AnimatePresence, motion } from "framer-motion";
 import { AboutSection } from "../components/AboutSection";
 import { ContactSection } from "../components/ContactSection";
 import { EducationSection } from "../components/EducationSection";
@@ -11,26 +12,34 @@ import { ThemeToggle } from "../components/ThemeToggle";
 
 export const Home = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      {/* Theme Toggle */}
-      <ThemeToggle />
-      {/* Background Effects */}
-      <StarBackground />
+    <AnimatePresence mode="wait">
+      <motion.div
+        className="min-h-screen bg-background text-foreground overflow-x-hidden"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -30 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+      >
+        {/* Theme Toggle */}
+        <ThemeToggle />
+        {/* Background Effects */}
+        <StarBackground />
 
-      {/* Navbar */}
-      <Navbar />
-      {/* Main Content */}
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <EducationSection />
-        <SkillsSection />
-        <ProjectsSection />
-        <ContactSection />
-      </main>
+        {/* Navbar */}
+        <Navbar />
+        {/* Main Content */}
+        <main>
+          <HeroSection />
+          <AboutSection />
+          <EducationSection />
+          <SkillsSection />
+          <ProjectsSection />
+          <ContactSection />
+        </main>
 
-      {/* Footer */}
-      <Footer />
-    </div>
+        {/* Footer */}
+        <Footer />
+      </motion.div>
+    </AnimatePresence>
   );
 };

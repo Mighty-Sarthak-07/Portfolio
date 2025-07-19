@@ -151,7 +151,9 @@ export const ProjectsSection = () => {
                 key={project.id}
                 layout
                 variants={cardAnim}
-                whileHover={{ scale: 1.04, boxShadow: '0 8px 32px 0 ' }}
+                whileHover={{ scale: 1.06, rotateX: 6, rotateY: -6, boxShadow: '0 8px 32px 0 rgba(80,0,200,0.13)' }}
+                whileTap={{ scale: 0.98 }}
+                style={{ perspective: 800 }}
                 className="group relative bg-card rounded-2xl overflow-hidden shadow-lg border-0 project-glass-card"
               >
                 <div className="absolute -inset-0.5 z-0 rounded-2xl bg-white/80 dark:bg-gray-900 border border-gray-200 shadow-md" />

@@ -1,10 +1,20 @@
 import { useEffect, useState } from "react";
 
-
+// Parallax hook
+function useParallax(offset = 0.03) {
+  const [scrollY, setScrollY] = useState(0);
+  useEffect(() => {
+    const onScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (factor) => `translateY(${scrollY * offset * factor}px)`;
+}
 
 export const StarBackground = () => {
   const [stars, setStars] = useState([]);
   const [meteors, setMeteors] = useState([]);
+  const parallax = useParallax(0.04);
 
   useEffect(() => {
     generateStars();
@@ -71,6 +81,7 @@ export const StarBackground = () => {
             top: star.y + "%",
             opacity: star.opacity,
             animationDuration: star.animationDuration + "s",
+            transform: parallax(star.size),
           }}
         />
       ))}
@@ -86,6 +97,7 @@ export const StarBackground = () => {
             top: meteor.y + "%",
             animationDelay: meteor.delay,
             animationDuration: meteor.animationDuration + "s",
+            transform: parallax(meteor.size * 2),
           }}
         />
       ))}

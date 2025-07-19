@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -44,13 +45,14 @@ export const Navbar = () => {
       
         <div className="hidden md:flex space-x-8">
           {navItems.map((item, key) => (
-            <a
+            <motion.a
               key={key}
               href={item.href}
               className="text-foreground/80 hover:text-primary transition-colors duration-300"
+              whileTap={{ scale: 0.92 }}
             >
               {item.name}
-            </a>
+            </motion.a>
           ))}
         </div>
 

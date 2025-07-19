@@ -3,21 +3,21 @@ import { motion } from "framer-motion";
 const educationData = [
   {
     degree: "Bachelor of Technology (B.Tech) in Computer Science",
-    institution: "Indian Institute of Technology (IIT)",
-    years: "2019 - 2023",
-    description: "Graduated with First Class Honors. Specialized in web development, data structures, and algorithms. Led multiple tech fests and coding clubs."
+    institution: "Bundelkhand Institute of Engineering and Technology, Jhansi (B.I.E.T)",
+    years: "2023-2027",
+    description: "Currently pursuing a B.Tech in Computer Science, building strong foundations in data structures, algorithms, software development, and emerging technologies. Achieved a Yearly Grade Point Average (YGPA) of 8.83 in the 2nd year, reflecting consistent academic excellence and a passion for problem-solving and innovation."
   },
   {
     degree: "Higher Secondary (12th)",
-    institution: "Delhi Public School",
-    years: "2017 - 2019",
-    description: "Completed with 94%. Focused on Mathematics, Physics, and Computer Science."
+    institution: "Kaushambi Presidency School",
+    years: "2021 - 2022",
+    description: "Completed with 88%, specializing in Mathematics, Physics, and Chemistry. Honored with the Best Performance Award for outstanding academic excellence, consistent dedication, and overall top performance among peers."
   },
   {
     degree: "Secondary (10th)",
-    institution: "Delhi Public School",
-    years: "2015 - 2017",
-    description: "Completed with 96%. Active in science exhibitions and olympiads."
+    institution: "Kaushambi Presidency School",
+    years: "2019 - 2020",
+    description: "Successfully completed secondary education with a strong academic record. Built a solid foundation in core subjects including Mathematics, Science, and English, demonstrating consistency and discipline throughout the academic year."
   }
 ];
 

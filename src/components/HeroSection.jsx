@@ -1,7 +1,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 import { Typewriter } from 'react-simple-typewriter';
 
 const fadeUp = {
@@ -29,7 +29,19 @@ const blobAnimation = {
   },
 };
 
+// Parallax hook for hero image
+function useParallaxHero(offset = 0.18) {
+  const [scrollY, setScrollY] = useState(0);
+  useEffect(() => {
+    const onScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return () => `translateY(${scrollY * offset}px) scale(${1 + Math.min(scrollY, 300) / 3000})`;
+}
+
 export const HeroSection = () => {
+  const parallaxHero = useParallaxHero(0.18);
    // For animated role text color
    const roles = ['Web Developer', 'UI/UX Designer', 'Full Stack Developer'];
    const colors = [
@@ -127,10 +139,11 @@ export const HeroSection = () => {
               variants={blobAnimation}
               animate="animate"
             />
-            <img
+            <motion.img
               src="/main.png"
               alt="Hero Graphic"
-              className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto relative z-10"
+              className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto relative z-10 rounded-2xl shadow-xl"
+              style={{ transform: parallaxHero() }}
             />
           </motion.div>
         </div>
