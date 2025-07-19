@@ -1,7 +1,8 @@
 
-
-import { ArrowDown } from "lucide-react";
 import { motion } from "framer-motion";
+import { ArrowDown } from "lucide-react";
+import { useRef, useState } from 'react';
+import { Typewriter } from 'react-simple-typewriter';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -29,6 +30,15 @@ const blobAnimation = {
 };
 
 export const HeroSection = () => {
+   // For animated role text color
+   const roles = ['Web Developer', 'UI/UX Designer', 'Full Stack Developer'];
+   const colors = [
+     'text-yellow-500', // Web Developer
+     'text-pink-500', // UI/UX Designer
+     'text-green-500', // Full Stack Developer
+   ];
+   const [roleIndex, setRoleIndex] = useState(0);
+   const prevWordIndex = useRef(0);
   return (
     <section
       id="hero"
@@ -42,15 +52,52 @@ export const HeroSection = () => {
       >
         <div className="flex flex-col md:flex-row items-center justify-between gap-2">
           <div className="text-center md:text-left flex-1 space-y-6">
-            <motion.h1
+          <motion.h1
               variants={fadeUp}
               custom={1}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-snug"
             >
               <span className="block">Hi, I'm</span>
-              <span className="block text-primary">Sarthak</span>
-              <span className="block text-gradient">Kesarwani</span>
+              <div className="flex gap-3">
+                <span className="block">Sarthak</span>
+                <span className="block text-primary">
+                  <Typewriter
+                    words={['Kesarwani']}
+                    loop={1}
+                    cursor
+                    cursorStyle='_'
+                    typeSpeed={80}
+                    deleteSpeed={50}
+                    delaySpeed={1000}
+                  />
+                </span>
+              </div>
             </motion.h1>
+
+            <motion.div
+              variants={fadeUp}
+              custom={2}
+              className="min-h-[2.5rem]"
+            >
+             <span className="text-4xl mr-3">A</span> 
+              <span className={`text-4xl font-semibold transition-colors duration-300 ${colors[roleIndex]}`}>
+                <Typewriter
+                  words={roles}
+                  loop={Infinity}
+                  cursor
+                  cursorStyle="_"
+                  typeSpeed={70}
+                  deleteSpeed={40}
+                  delaySpeed={1200}
+                  onType={(char, { wordIndex }) => {
+                    if (prevWordIndex.current !== wordIndex) {
+                      setRoleIndex(wordIndex);
+                      prevWordIndex.current = wordIndex;
+                    }
+                  }}
+                />
+              </span>
+            </motion.div>
 
             <motion.p
               variants={fadeUp}

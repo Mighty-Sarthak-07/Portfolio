@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const skills = [
   { name: "HTML/CSS", level: 95, category: "frontend" },
@@ -72,27 +72,15 @@ export const SkillsSection = () => {
             <motion.div
               key={key}
               className="bg-card p-6 rounded-lg shadow-xs card-hover"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 * key, duration: 0.5 }}
-              whileHover={{ scale: 1.03 }}
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ delay: 0.08 * key, duration: 0.6, type: 'spring', bounce: 0.4 }}
+              whileHover={{ scale: 1.05, boxShadow: '0 4px 24px 0 rgba(80,0,200,0.10)' }}
             >
               <div className="text-left mb-4">
                 <h3 className="font-semibold text-lg">{skill.name}</h3>
               </div>
-              <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
-                <motion.div
-                  className="bg-primary h-2 rounded-full origin-left"
-                  initial={{ width: 0 }}
-                  animate={{ width: `${skill.level}%` }}
-                  transition={{ duration: 1, delay: 0.2 * key, ease: "easeOut" }}
-                />
-              </div>
-              <div className="text-right mt-1">
-                <span className="text-sm text-muted-foreground">
-                  {skill.level}%
-                </span>
-              </div>
+              <SkillBarAnimated level={skill.level} index={key} />
             </motion.div>
           ))}
         </motion.div>
@@ -100,3 +88,40 @@ export const SkillsSection = () => {
     </section>
   );
 };
+
+// Animated progress bar with count-up
+function SkillBarAnimated({ level, index }) {
+  const [displayLevel, setDisplayLevel] = useState(0);
+  useEffect(() => {
+    let start = 0;
+    const duration = 1000; // ms
+    const startTime = performance.now();
+    function animate(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      setDisplayLevel(Math.floor(progress * level));
+      if (progress < 1) requestAnimationFrame(animate);
+      else setDisplayLevel(level);
+    }
+    requestAnimationFrame(animate);
+    // eslint-disable-next-line
+  }, [level, index]);
+
+  return (
+    <>
+      <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
+        <motion.div
+          className="skill-bar-animated h-2 rounded-full origin-left"
+          initial={{ width: 0 }}
+          animate={{ width: `${level}%` }}
+          transition={{ duration: 1, delay: 0.2 * index, ease: "easeOut" }}
+        />
+      </div>
+      <div className="text-right mt-1">
+        <span className="text-sm text-muted-foreground">
+          {displayLevel}%
+        </span>
+      </div>
+    </>
+  );
+}

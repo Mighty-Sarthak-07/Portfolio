@@ -154,9 +154,191 @@
   box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
 }
 
+/* Animated conic-gradient border using CSS @property */
+@property --bg-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
+}
+
+@keyframes spin {
+  to {
+    --bg-angle: 360deg;
+  }
+}
+
+.animated-border {
+  border-radius: 0.75rem;
+  border: 4px solid transparent;
+  background:
+    linear-gradient(to bottom, oklch(0.1 0.2 240 / 0.95), oklch(0.1 0.2 240 / 0.95)) padding-box,
+    conic-gradient(from var(--bg-angle) in oklch longer hue, oklch(0.85 0.37 0) 0 0) border-box;
+  animation: spin 2.5s infinite linear paused;
+  transition: box-shadow 0.3s;
+  box-shadow: 0 2px 16px 0 oklch(0.1 0.37 315 / 0.25);
+  position: relative;
+}
+.animated-border:hover {
+  animation-play-state: running;
+}
+
+.media-object {
+  --border-width: 3px;
+  --radius: 1rem;
+  position: relative;
+  border-radius: var(--radius);
+  border: var(--border-width) solid transparent;
+}
+
+.media-object::before {
+  content: " ";
+  position: absolute;
+  inset: calc(var(--border-width) * -1);
+  z-index: 0;
+  border: inherit;
+  border-radius: inherit;
+  background-image: conic-gradient(from var(--angle), #381D6A 80%, #E0D1FF 88%, #E0D1FF 92%, #381D6A 100%);
+  background-origin: border-box;
+  -webkit-mask:
+    linear-gradient(black, black) content-box,
+    linear-gradient(black, black);
+  mask: linear-gradient(black, black),
+        linear-gradient(black, black);
+  -webkit-mask-clip: content-box, border-box;
+  mask-clip: content-box, border-box;
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+@supports not (background: paint(something)) {
+  .media-object::before {
+    background-image: conic-gradient(#381D6A 80%, #E0D1FF 88%, #E0D1FF 92%, #381D6A 100%);
+  }
+}
+
+.media-object:hover::before {
+  animation-play-state: paused;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+
+@keyframes spin {
+  to {
+    --angle: 1turn;
+  }
+}
+
 #root {
   max-width: 100%;
   margin: 0 auto;
   padding: 0;
   text-align: center;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}
+.skill-bar-animated {
+  background: linear-gradient(90deg, #a78bfa 25%, #f3e8ff 50%, #a78bfa 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+.project-glass-card {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.10);
+  border-radius: 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+.project-gradient-border {
+  pointer-events: none;
+  z-index: 1;
+  border-radius: 1.25rem;
+  background: gray;
+  opacity: 0.7;
+  filter: blur(8px);
+  transition: opacity 0.3s;
+}
+.group:hover .project-gradient-border {
+  opacity: 1;
+  filter: blur(2px);
+}
+.tag-chip-animated {
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s;
+  box-shadow: 0 2px 8px 0 rgba(139,92,246,0.10);
+}
+.tag-chip-colorful-0 { background: linear-gradient(90deg,#a1c4fd,#c2e9fb); color: #222; }
+.tag-chip-colorful-1 { background: linear-gradient(90deg,#f7971e,#ffd200); color: #222; }
+.tag-chip-colorful-2 { background: linear-gradient(90deg,#43e97b,#38f9d7); color: #222; }
+.tag-chip-colorful-3 { background: linear-gradient(90deg,#fa709a,#fee140); color: #222; }
+.tag-chip-colorful-4 { background: linear-gradient(90deg,#30cfd0,#330867); color: #fff; }
+
+@media (prefers-color-scheme: dark) {
+  .project-glass-card-3d {
+    background: rgba(0,0,0,0.80);
+  }
+  .project-gradient-border-3d {
+    background: conic-gradient(from 180deg at 50% 50%, #000 0%, #222 100%);
+  }
+}
+.project-glass-card-3d {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(14px) saturate(1.2);
+  box-shadow: 0 12px 40px 0 rgba(80,0,200,0.10), 0 2px 16px 0 rgba(80,0,200,0.10);
+  border-radius: 1.25rem;
+  position: relative;
+  overflow: visible;
+  transform-style: preserve-3d;
+}
+.project-gradient-border-3d {
+  pointer-events: none;
+  z-index: 1;
+  border-radius: 1.25rem;
+  background: conic-gradient(from 180deg at 50% 50%, #a1c4fd 0%, #c2e9fb 25%, #f7971e 50%, #43e97b 75%, #a1c4fd 100%);
+  opacity: 0.8;
+  filter: blur(10px);
+  transition: opacity 0.3s, filter 0.3s;
+}
+.group:hover .project-gradient-border-3d {
+  opacity: 1;
+  filter: blur(3px);
+}
+.tag-chip-3d {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(4px);
+  border: 1.5px solid rgba(139,92,246,0.12);
+  box-shadow: 0 2px 8px 0 rgba(139,92,246,0.13);
+  transition: box-shadow 0.3s, transform 0.3s, background 0.3s;
+}
+
+.about-glass-card-3d {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(14px) saturate(1.1);
+  box-shadow: 0 8px 32px 0 rgba(60,60,60,0.10), 0 2px 16px 0 rgba(60,60,60,0.10);
+  border-radius: 1.25rem;
+  position: relative;
+  overflow: visible;
+  transform-style: preserve-3d;
+  padding: 1.5rem;
+  border: 1.5px solid #e5e7eb;
+}
+.about-gradient-border-3d {
+  pointer-events: none;
+  z-index: 1;
+  border-radius: 1.25rem;
+  background: linear-gradient(120deg, #f3f4f6 0%, #e5e7eb 100%);
+  opacity: 0.7;
+  filter: blur(6px);
+  transition: opacity 0.3s, filter 0.3s;
+}
+.group:hover .about-gradient-border-3d {
+  opacity: 1;
+  filter: blur(2px);
 }

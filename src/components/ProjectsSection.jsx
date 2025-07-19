@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, ExternalLink, Github } from "lucide-react";
+import { useState } from "react";
 
 const projects = [
   {
@@ -73,6 +73,19 @@ const projects = [
   },
 ];
 
+const cardStagger = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.13,
+    },
+  },
+};
+const cardAnim = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', bounce: 0.35, duration: 0.7 } },
+};
+
 export const ProjectsSection = () => {
   const [projectType, setProjectType] = useState("all");
 
@@ -99,26 +112,26 @@ export const ProjectsSection = () => {
 
         <div className="flex justify-center mb-8 space-x-4">
           <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.08, background: "linear-gradient(90deg,#a1c4fd,#c2e9fb)" }}
+            whileTap={{ scale: 0.97 }}
             onClick={() => setProjectType("all")}
-            className={`px-4 py-2 rounded-full ${projectType === "all" ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground"}`}
+            className={`px-5 py-2 rounded-full font-semibold shadow-md transition-all duration-300 border-2 border-transparent ${projectType === "all" ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white shadow-lg" : "bg-secondary text-secondary-foreground hover:bg-gradient-to-r hover:from-indigo-400 hover:to-pink-400 hover:text-white"}`}
           >
             All Projects
           </motion.button>
           <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.08, background: "linear-gradient(90deg,#f7971e,#ffd200)" }}
+            whileTap={{ scale: 0.97 }}
             onClick={() => setProjectType("webapp")}
-            className={`px-4 py-2 rounded-full ${projectType === "webapp" ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground"}`}
+            className={`px-5 py-2 rounded-full font-semibold shadow-md transition-all duration-300 border-2 border-transparent ${projectType === "webapp" ? "bg-gradient-to-r from-yellow-400 via-pink-500 to-red-500 text-white shadow-lg" : "bg-secondary text-secondary-foreground hover:bg-gradient-to-r hover:from-yellow-400 hover:to-red-400 hover:text-white"}`}
           >
             Web Apps
           </motion.button>
           <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.08, background: "linear-gradient(90deg,#43e97b,#38f9d7)" }}
+            whileTap={{ scale: 0.97 }}
             onClick={() => setProjectType("uiux")}
-            className={`px-4 py-2 rounded-full ${projectType === "uiux" ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground"}`}
+            className={`px-5 py-2 rounded-full font-semibold shadow-md transition-all duration-300 border-2 border-transparent ${projectType === "uiux" ? "bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 text-white shadow-lg" : "bg-secondary text-secondary-foreground hover:bg-gradient-to-r hover:from-green-400 hover:to-blue-400 hover:text-white"}`}
           >
             UI/UX
           </motion.button>
@@ -126,46 +139,57 @@ export const ProjectsSection = () => {
 
         <AnimatePresence>
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+            variants={cardStagger}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
             layout
           >
             {filteredProjects.map((project, key) => (
               <motion.div
                 key={project.id}
                 layout
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-                className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover"
+                variants={cardAnim}
+                whileHover={{ scale: 1.04, boxShadow: '0 8px 32px 0 ' }}
+                className="group relative bg-card rounded-2xl overflow-hidden shadow-lg border-0 project-glass-card"
               >
-                <div className="h-48 overflow-hidden">
+                <div className="absolute -inset-0.5 z-0 rounded-2xl bg-white/80 dark:bg-gray-900 border border-gray-200 shadow-md" />
+                <div className="h-48 overflow-hidden relative z-10">
                   <motion.img
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.3 }}
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ duration: 0.4 }}
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-t-2xl"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col justify-end p-4">
+                    <h3 className="text-lg font-bold text-white mb-1 drop-shadow-lg">{project.title}</h3>
+                    <p className="text-xs text-white mb-2 drop-shadow-md">{project.description}</p>
+                  </div>
                 </div>
 
-                <div className="p-6">
+                <div className="p-6 relative z-10">
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.map((tag, index) => (
-                      <span key={index} className="px-2 py-1 text-xs font-medium border rounded-full bg-secondary text-secondary-foreground">
+                      <motion.span
+                        key={index}
+                        whileHover={{ scale: 1.12, rotate: 3 }}
+                        className={`px-2 py-1 text-xs font-semibold rounded-full shadow-sm tag-chip-animated tag-chip-colorful-${index % 5}`}
+                      >
                         {tag}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
 
-                  <h3 className="text-xl font-semibold mb-1">{project.title}</h3>
+                  <h3 className="text-xl font-semibold mb-1 text-primary drop-shadow-sm">{project.title}</h3>
                   <p className="text-muted-foreground text-sm mb-4">
                     {project.description}
                   </p>
                   <div className="flex justify-between items-center">
                     <div className="flex space-x-3">
                       <motion.a
-                        whileHover={{ scale: 1.1 }}
+                        whileHover={{ scale: 1.13 }}
                         whileTap={{ scale: 0.9 }}
                         href={project.demoUrl}
                         target="_blank"
@@ -175,7 +199,7 @@ export const ProjectsSection = () => {
                       </motion.a>
                       {project.githubUrl ? (
                         <motion.a
-                          whileHover={{ scale: 1.1 }}
+                          whileHover={{ scale: 1.13 }}
                           whileTap={{ scale: 0.9 }}
                           href={project.githubUrl}
                           target="_blank"
