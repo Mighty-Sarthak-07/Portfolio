@@ -1,6 +1,6 @@
+import { AnimatePresence, motion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
 
 export const ThemeToggle = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -29,18 +29,38 @@ export const ThemeToggle = () => {
   };
 
   return (
-    <button
+    <motion.button
       onClick={toggleTheme}
-      className={cn(
-        "fixed max-sm:hidden top-5 right-5 z-50 p-2 rounded-full transition-colors duration-300",
-        "focus:outlin-hidden"
-      )}
+      // Positioned at far right on all screen sizes, well clear of hamburger/nav
+      className="fixed top-3 right-14 md:right-4 lg:right-5 z-50 p-2 rounded-full border border-border/60 bg-card/85 backdrop-blur-md shadow-md hover:shadow-lg hover:border-primary/40 transition-all duration-300"
+      aria-label={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.88 }}
+      title={isDarkMode ? "Light Mode" : "Dark Mode"}
     >
-      {isDarkMode ? (
-        <Sun className="h-6 w-6 text-yellow-300" />
-      ) : (
-        <Moon className="h-6 w-6 text-blue-900" />
-      )}
-    </button>
+      <AnimatePresence mode="wait" initial={false}>
+        {isDarkMode ? (
+          <motion.div
+            key="sun"
+            initial={{ rotate: -90, opacity: 0, scale: 0.7 }}
+            animate={{ rotate: 0, opacity: 1, scale: 1 }}
+            exit={{ rotate: 90, opacity: 0, scale: 0.7 }}
+            transition={{ duration: 0.22 }}
+          >
+            <Sun className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400" />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="moon"
+            initial={{ rotate: 90, opacity: 0, scale: 0.7 }}
+            animate={{ rotate: 0, opacity: 1, scale: 1 }}
+            exit={{ rotate: -90, opacity: 0, scale: 0.7 }}
+            transition={{ duration: 0.22 }}
+          >
+            <Moon className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.button>
   );
 };

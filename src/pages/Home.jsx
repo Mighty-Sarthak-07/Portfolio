@@ -3,11 +3,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { AboutSection } from "../components/AboutSection";
 import { ContactSection } from "../components/ContactSection";
 import { EducationSection } from "../components/EducationSection";
+import { ExperienceSection } from "../components/ExperienceSection";
 import { Footer } from "../components/Footer";
 import { HeroSection } from "../components/HeroSection";
 import { Navbar } from "../components/Navbar";
 import { ProjectsSection } from "../components/ProjectsSection";
 import { SkillsSection } from "../components/SkillsSection";
+import { StatsSection } from "../components/StatsSection";
+import { TestimonialsSection } from "../components/TestimonialsSection";
 import { ThemeToggle } from "../components/ThemeToggle";
 
 export const Home = () => {
@@ -15,29 +18,29 @@ export const Home = () => {
     <AnimatePresence mode="wait">
       <motion.div
         className="min-h-screen bg-background text-foreground overflow-x-hidden"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -30 }}
-        transition={{ duration: 0.6, ease: "easeInOut" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.45, ease: "easeInOut" }}
       >
-        {/* Theme Toggle */}
+        {/* Fixed overlays */}
         <ThemeToggle />
-        {/* Background Effects */}
         <StarBackground />
-
-        {/* Navbar */}
         <Navbar />
-        {/* Main Content */}
+
+        {/* Page sections */}
         <main>
-          <HeroSection />
-          <AboutSection />
-          <EducationSection />
-          <SkillsSection />
-          <ProjectsSection />
-          <ContactSection />
+          <HeroSection />        {/* 3D canvas bg + typewriter */}
+          <StatsSection />       {/* Animated counters + 3D orb + marquee */}
+          <AboutSection />       {/* Bio + skills chips + service cards */}
+          <ExperienceSection />  {/* Internship timeline */}
+          <EducationSection />   {/* Academic timeline */}
+          <SkillsSection />      {/* 3D skill logos + progress bars */}
+          <ProjectsSection />    {/* Glassmorphic project cards */}
+          <TestimonialsSection />{/* Star-rated testimonial cards */}
+          <ContactSection />     {/* Form + social links */}
         </main>
 
-        {/* Footer */}
         <Footer />
       </motion.div>
     </AnimatePresence>

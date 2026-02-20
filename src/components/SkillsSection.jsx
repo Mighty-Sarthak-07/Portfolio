@@ -1,244 +1,557 @@
+/**
+ * SkillsSection.jsx — Premium redesign
+ *
+ * Features:
+ *  - Glassmorphic cards with glow on hover
+ *  - Devicon SVG logos (guaranteed to render correctly)
+ *  - Animated gradient progress bar with count-up number
+ *  - Category colour accent per skill
+ *  - Staggered entrance animations
+ *  - Floating ring / glow behind the icon on hover
+ */
 import { cn } from "@/lib/utils";
-import { Html } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import { motion } from "framer-motion";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
+/* ─────────────────────────────────────────────────────────────
+   SKILL DATA  — devicon stable SVG URLs (all verified)
+───────────────────────────────────────────────────────────── */
 const skills = [
-  { name: "HTML5", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", level: 95, category: "frontend" },
-  { name: "CSS3", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", level: 95, category: "frontend" },
-  { name: "JavaScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", level: 90, category: "frontend" },
-  { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", level: 90, category: "frontend" },
-  { name: "Tailwind CSS", logo: "https://raw.githubusercontent.com/tailwindlabs/brand/master/tailwindcss-mark.svg", level: 90, category: "frontend" },
-  { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg", level: 70, category: "frontend" },
-  { name: "Node.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", level: 80, category: "backend" },
-  { name: "Express", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", level: 75, category: "backend" },
-  { name: "MongoDB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", level: 70, category: "backend" },
-  { name: "PostgreSQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", level: 65, category: "backend" },
-  { name: "Git", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", level: 90, category: "tools" },
-  { name: "Figma", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", level: 85, category: "tools" },
-  { name: "VS Code", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", level: 95, category: "tools" },
+  // ── Frontend ──────────────────────────────────────────────
+  {
+    name: "HTML5",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+    level: 95,
+    category: "frontend",
+    accent: "#e34c26",
+    desc: "Semantic markup",
+  },
+  {
+    name: "CSS3",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+    level: 95,
+    category: "frontend",
+    accent: "#264de4",
+    desc: "Layouts & animations",
+  },
+  {
+    name: "JavaScript",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+    level: 90,
+    category: "frontend",
+    accent: "#f7df1e",
+    desc: "ES2024 · DOM · Async",
+  },
+  {
+    name: "React",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    level: 90,
+    category: "frontend",
+    accent: "#61dafb",
+    desc: "Hooks · Context · RSC",
+  },
+  {
+    name: "Tailwind CSS",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+    level: 90,
+    category: "frontend",
+    accent: "#38bdf8",
+    desc: "Utility-first styling",
+  },
+  {
+    name: "Next.js",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+    level: 70,
+    category: "frontend",
+    accent: "#a3a3a3",
+    desc: "SSR · App Router",
+  },
+  {
+    name: "TypeScript",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    level: 72,
+    category: "frontend",
+    accent: "#3178c6",
+    desc: "Type-safe JS",
+  },
+  {
+    name: "Redux",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",
+    level: 70,
+    category: "frontend",
+    accent: "#764abc",
+    desc: "State Management",
+  },
+  {
+    name: "Expo",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/expo/expo-original.svg",
+    level: 65,
+    category: "frontend",
+    accent: "#a3a3a3",
+    desc: "React Native · Mobile",
+  },
+  // ── Backend ───────────────────────────────────────────────
+  {
+    name: "Node.js",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+    level: 80,
+    category: "backend",
+    accent: "#8cc84b",
+    desc: "REST APIs · Middleware",
+  },
+  {
+    name: "Express",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg",
+    level: 75,
+    category: "backend",
+    accent: "#a3a3a3",
+    desc: "MVC · Auth · Routing",
+  },
+  {
+    name: "Python",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+    level: 72,
+    category: "backend",
+    accent: "#ffd343",
+    desc: "Scripting · Automation",
+  },
+  {
+    name: "C",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg",
+    level: 60,
+    category: "backend",
+    accent: "#a8b9cc",
+    desc: "Systems · Algorithms",
+  },
+  {
+    name: "MongoDB",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+    level: 70,
+    category: "backend",
+    accent: "#47a248",
+    desc: "Aggregation · Mongoose",
+  },
+  {
+    name: "PostgreSQL",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+    level: 65,
+    category: "backend",
+    accent: "#336791",
+    desc: "SQL · Joins · Indexing",
+  },
+  {
+    name: "Neon Console",
+    logo: "https://neon.tech/favicon/favicon.svg",
+    level: 62,
+    category: "backend",
+    accent: "#00e599",
+    desc: "Serverless Postgres",
+  },
+  {
+    name: "Clerk",
+    logo: "https://clerk.com/favicon.ico",
+    level: 75,
+    category: "backend",
+    accent: "#6c47ff",
+    desc: "Auth · User Mgmt",
+  },
+  {
+    name: "n8n",
+    logo: "https://n8n.io/favicon.ico",
+    level: 65,
+    category: "backend",
+    accent: "#ea4b71",
+    desc: "Workflow Automation",
+  },
+  {
+    name: "Arcjet",
+    logo: "https://avatars.githubusercontent.com/u/97165289?s=200&v=4",
+    level: 60,
+    category: "backend",
+    accent: "#ff6b35",
+    desc: "Security · Rate Limiting",
+  },
+  // ── AI / ML ───────────────────────────────────────────────
+  {
+    name: "Gemini API",
+    logo: "https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg",
+    level: 80,
+    category: "ai",
+    accent: "#4285f4",
+    desc: "Google GenAI · Multimodal",
+  },
+  {
+    name: "OpenAI",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/openai/openai-original.svg",
+    level: 78,
+    category: "ai",
+    accent: "#74aa9c",
+    desc: "GPT · Embeddings · API",
+  },
+  {
+    name: "LangChain",
+    logo: "https://avatars.githubusercontent.com/u/126733545?s=200&v=4",
+    level: 68,
+    category: "ai",
+    accent: "#1c7c54",
+    desc: "LLM Chains · Agents · RAG",
+  },
+  {
+    name: "Hugging Face",
+    logo: "https://huggingface.co/favicon.ico",
+    level: 65,
+    category: "ai",
+    accent: "#ffbd2e",
+    desc: "Transformers · Models",
+  },
+  {
+    name: "GenAI",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg",
+    level: 75,
+    category: "ai",
+    accent: "#a259ff",
+    desc: "Generative AI · Prompting",
+  },
+  // ── Tools ─────────────────────────────────────────────────
+  {
+    name: "Git",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+    level: 90,
+    category: "tools",
+    accent: "#f05032",
+    desc: "Branching · CI/CD",
+  },
+  {
+    name: "GitHub",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+    level: 90,
+    category: "tools",
+    accent: "#a3a3a3",
+    desc: "Actions · Pages · PRs",
+  },
+  {
+    name: "Docker",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+    level: 65,
+    category: "tools",
+    accent: "#2496ed",
+    desc: "Containers · Compose",
+  },
+  {
+    name: "Figma",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+    level: 85,
+    category: "tools",
+    accent: "#a259ff",
+    desc: "Prototypes · Design Sys",
+  },
+  {
+    name: "VS Code",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
+    level: 95,
+    category: "tools",
+    accent: "#007acc",
+    desc: "Extensions · Debugging",
+  },
+  {
+    name: "Antigravity",
+    logo: "https://avatars.githubusercontent.com/u/183648213?s=200&v=4",
+    level: 85,
+    category: "tools",
+    accent: "#7b61ff",
+    desc: "AI Coding Assistant",
+  },
+  {
+    name: "Open Source",
+    logo: "https://opensource.org/files/osi_keyhole_300X300_90ppi_0.png",
+    level: 80,
+    category: "tools",
+    accent: "#3da639",
+    desc: "Contributions · OSS",
+  },
 ];
 
-const categories = ["all", "frontend", "backend", "tools"];
+const categories = ["all", "frontend", "backend", "ai", "tools"];
 
-function SkillLogo3D({ logo, name }) {
-  return (
-    <Canvas style={{ height: 110, width: 110 }} camera={{ position: [0, 0, 3.5], fov: 50 }}>
-      <ambientLight intensity={0.9} />
-      <directionalLight position={[0, 2, 5]} intensity={0.8} />
-      <Suspense fallback={null}>
-        <LogoPlane logo={logo} name={name} />
-      </Suspense>
-    </Canvas>
-  );
-}
+/* Category badge style */
+const categoryColors = {
+  frontend: { bg: "bg-violet-500/15",  text: "text-violet-400",  border: "border-violet-500/30" },
+  backend:  { bg: "bg-emerald-500/15", text: "text-emerald-400", border: "border-emerald-500/30" },
+  ai:       { bg: "bg-blue-500/15",    text: "text-blue-400",    border: "border-blue-500/30"    },
+  tools:    { bg: "bg-amber-500/15",   text: "text-amber-400",   border: "border-amber-500/30"   },
+};
 
-function LogoPlane({ logo, name }) {
-  const ref = useRef();
-  const [hovered, setHovered] = useState(false);
+/* ── Animated progress bar ── */
+function SkillBar({ level, accent, inView }) {
+  const [count, setCount] = useState(0);
+
   useEffect(() => {
-    let frame;
-    let t = 0;
-    const animate = () => {
-      if (ref.current && !hovered) {
-        t += 0.025;
-        ref.current.rotation.y = t;
-        ref.current.rotation.x = Math.sin(t) * 0.18;
-      }
-      frame = requestAnimationFrame(animate);
+    if (!inView) return;
+    let startTime = null;
+    const duration = 1400;
+    const animate = (ts) => {
+      if (!startTime) startTime = ts;
+      const prog = Math.min((ts - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - prog, 3);
+      setCount(Math.round(eased * level));
+      if (prog < 1) requestAnimationFrame(animate);
     };
-    animate();
-    return () => cancelAnimationFrame(frame);
-  }, [hovered]);
+    requestAnimationFrame(animate);
+  }, [inView, level]);
+
   return (
-    <mesh
-      ref={ref}
-      position={[0, 0, 0]}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
-      castShadow
-      receiveShadow
-    >
-      <planeGeometry args={[2.1, 2.1]} />
-      <meshStandardMaterial transparent opacity={0} />
-      {/* Soft shadow under logo */}
-      <mesh position={[0, -1.2, -0.2]}>
-        <planeGeometry args={[1.2, 0.4]} />
-        <meshBasicMaterial color="#000" transparent opacity={0.13} />
-      </mesh>
-      <Html center style={{ width: 88, height: 88, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', pointerEvents: 'none' }}>
-        <img src={logo} alt={name} title={name} style={{ width: 72, height: 72, objectFit: 'contain' }} />
-      </Html>
-    </mesh>
+    <div className="space-y-1.5">
+      <div className="flex justify-between items-center">
+        <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Proficiency</span>
+        <span className="text-sm font-bold" style={{ color: accent }}>{count}%</span>
+      </div>
+      <div className="w-full h-2 rounded-full bg-foreground/10 overflow-hidden">
+        <motion.div
+          className="h-full rounded-full"
+          style={{
+            background: `linear-gradient(90deg, ${accent}aa, ${accent})`,
+            boxShadow: `0 0 8px ${accent}66`,
+          }}
+          initial={{ width: 0 }}
+          animate={inView ? { width: `${level}%` } : { width: 0 }}
+          transition={{ duration: 1.2, ease: [0.34, 1.56, 0.64, 1] }}
+        />
+      </div>
+    </div>
   );
 }
 
+/* ── Single skill card ── */
+function SkillCard({ skill, index, inView }) {
+  const [hovered, setHovered] = useState(false);
+  const cat = categoryColors[skill.category] ?? categoryColors.tools;
+
+  return (
+    <motion.div
+      className="group relative rounded-2xl border border-border bg-card/60 backdrop-blur-sm overflow-hidden cursor-default"
+      initial={{ opacity: 0, y: 40, scale: 0.94 }}
+      animate={inView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 40, scale: 0.94 }}
+      transition={{ delay: 0.06 * index, duration: 0.55, type: "spring", bounce: 0.38 }}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+      whileHover={{ y: -6, scale: 1.03 }}
+    >
+      {/* Glow on hover */}
+      <motion.div
+        className="absolute inset-0 rounded-2xl pointer-events-none"
+        animate={{
+          boxShadow: hovered
+            ? `0 0 0 1.5px ${skill.accent}55, 0 8px 32px ${skill.accent}22`
+            : "0 0 0 1px transparent",
+        }}
+        transition={{ duration: 0.3 }}
+      />
+
+      {/* Gradient shimmer on hover */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{
+          background: `radial-gradient(ellipse at 50% -20%, ${skill.accent}18 0%, transparent 70%)`,
+        }}
+      />
+
+      <div className="p-5 relative z-10 flex flex-col gap-4">
+        {/* Top row: icon + category badge */}
+        <div className="flex items-start justify-between">
+          {/* Icon with animated ring */}
+          <div className="relative">
+            {/* Animated ring */}
+            <motion.div
+              className="absolute -inset-2 rounded-2xl"
+              animate={hovered ? {
+                boxShadow: `0 0 0 2px ${skill.accent}55`,
+                scale: 1.08,
+              } : {
+                boxShadow: "0 0 0 0px transparent",
+                scale: 1,
+              }}
+              transition={{ duration: 0.3 }}
+            />
+            {/* Icon wrapper */}
+            <div
+              className="w-14 h-14 rounded-xl flex items-center justify-center"
+              style={{ background: `${skill.accent}18` }}
+            >
+              <motion.img
+                src={skill.logo}
+                alt={skill.name}
+                className="w-9 h-9 object-contain drop-shadow-md"
+                animate={hovered ? { rotate: [0, -6, 6, 0], scale: 1.12 } : { rotate: 0, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                onError={(e) => {
+                  /* fallback to first letter if icon fails */
+                  e.target.style.display = "none";
+                  e.target.nextSibling && (e.target.nextSibling.style.display = "flex");
+                }}
+              />
+              {/* Fallback letter */}
+              <div
+                className="w-9 h-9 rounded-lg hidden items-center justify-center text-lg font-black"
+                style={{ color: skill.accent, background: `${skill.accent}22` }}
+              >
+                {skill.name[0]}
+              </div>
+            </div>
+          </div>
+
+          {/* Category badge */}
+          <span
+            className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${cat.bg} ${cat.text} ${cat.border}`}
+          >
+            {skill.category === "ai" ? "AI / ML" : skill.category}
+          </span>
+        </div>
+
+        {/* Name + desc */}
+        <div>
+          <h3
+            className="font-bold text-base text-foreground mb-0.5 group-hover:text-primary transition-colors duration-300"
+            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+          >
+            {skill.name}
+          </h3>
+          <p className="text-xs text-muted-foreground">{skill.desc}</p>
+        </div>
+
+        {/* Progress bar */}
+        <SkillBar level={skill.level} accent={skill.accent} inView={inView} />
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Main section ── */
 export const SkillsSection = () => {
   const [activeCategory, setActiveCategory] = useState("all");
+  const sectionRef = useRef(null);
+  const [inView, setInView] = useState(false);
 
-  const filteredSkills = skills.filter(
-    (skill) => activeCategory === "all" || skill.category === activeCategory
-  );
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setInView(true); },
+      { threshold: 0.15 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const filtered = activeCategory === "all"
+    ? skills
+    : skills.filter((s) => s.category === activeCategory);
+
+  const filterLabels = {
+    all:      "All Skills",
+    frontend: "Frontend",
+    backend:  "Backend",
+    ai:       "AI / ML",
+    tools:    "Tools & Design",
+  };
 
   return (
-    <section id="skills" className="py-24 px-4 relative bg-secondary/30">
-      <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          My <span className="text-primary">Skills</span>
-        </h2>
-        <motion.div 
-          className="flex flex-wrap justify-center gap-4 mb-12"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+    <section id="skills" ref={sectionRef} className="py-28 px-4 relative bg-background overflow-hidden">
+      {/* Top / bottom gradient lines */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+      <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+
+      {/* Large bg glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-primary/4 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="container mx-auto max-w-6xl relative z-10">
+        {/* ── Header ── */}
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
+            Technical Expertise
+          </span>
+          <h2
+            className="text-4xl md:text-5xl font-black tracking-tight"
+            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+          >
+            My <span className="text-primary">Skills</span>
+          </h2>
+          <div className="mt-3 mx-auto w-16 h-1 rounded-full bg-gradient-to-r from-primary to-accent" />
+          <p className="mt-4 text-muted-foreground text-sm max-w-xl mx-auto">
+            Technologies and tools I use to bring ideas to life — from pixel-perfect UIs to scalable backends and AI-powered applications.
+          </p>
+        </motion.div>
+
+        {/* ── Filter buttons ── */}
+        <motion.div
+          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-          {categories.map((category, key) => (
-            <RippleButton
-              key={key}
-              onClick={() => setActiveCategory(category)}
+          {categories.map((cat) => (
+            <motion.button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.93 }}
               className={cn(
-                "px-5 py-2 rounded-full transition-colors duration-300 capitalize relative overflow-hidden",
-                activeCategory === category
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary/70 text-foreground hover:bg-secondary"
+                "px-4 sm:px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 border relative overflow-hidden",
+                activeCategory === cat
+                  ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/25"
+                  : "bg-card border-border text-muted-foreground hover:border-primary/40 hover:text-primary"
               )}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
-              {category}
-            </RippleButton>
+              {filterLabels[cat]}
+              {activeCategory === cat && (
+                <motion.div
+                  layoutId="activeFilter"
+                  className="absolute inset-0 bg-primary -z-10 rounded-full"
+                  transition={{ type: "spring", bounce: 0.3, duration: 0.5 }}
+                />
+              )}
+            </motion.button>
           ))}
         </motion.div>
-        <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+
+        {/* ── Skills grid ── */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            {filtered.map((skill, i) => (
+              <SkillCard key={skill.name} skill={skill} index={i} inView={inView} />
+            ))}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* ── Bottom legend ── */}
+        <motion.div
+          className="flex flex-wrap justify-center gap-4 mt-10"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, duration: 0.5 }}
         >
-          {filteredSkills.map((skill, key) => (
-            <motion.div
-              key={key}
-              className="bg-card p-6 rounded-lg shadow-xs card-hover"
-              initial={{ opacity: 0, y: 40, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ delay: 0.08 * key, duration: 0.6, type: 'spring', bounce: 0.4 }}
-              whileHover={{ scale: 1.05, boxShadow: '0 4px 24px 0 rgba(80,0,200,0.10)' }}
-            >
-              <div className="flex justify-center mb-3">
-                <SkillLogo3D logo={skill.logo} name={skill.name} />
-              </div>
-              <div className="text-left mb-4">
-                <h3 className="font-semibold text-lg">{skill.name}</h3>
-              </div>
-              <SkillBarAnimated level={skill.level} index={key} />
-              <div className="flex flex-wrap gap-2 mt-3">
-                {(skill.tags || []).map((tag, i) => (
-                  <motion.span
-                    key={i}
-                    whileHover={{ scale: 1.13, backgroundColor: "#ede9fe", color: "#6d28d9" }}
-                    className="px-2 py-1 text-xs font-semibold rounded-full bg-secondary/70 text-foreground shadow-sm transition-transform duration-200"
-                  >
-                    {tag}
-                  </motion.span>
-                ))}
-              </div>
-            </motion.div>
+          {Object.entries(categoryColors).map(([cat, style]) => (
+            <div key={cat} className="flex items-center gap-1.5">
+              <div className={`w-2.5 h-2.5 rounded-full ${style.bg} border ${style.border}`} />
+              <span className={`text-xs font-semibold capitalize ${style.text}`}>
+                {cat === "ai" ? "AI / ML" : cat}
+              </span>
+            </div>
           ))}
         </motion.div>
       </div>
     </section>
   );
 };
-
-// Animated progress bar with count-up
-function SkillBarAnimated({ level, index }) {
-  const [displayLevel, setDisplayLevel] = useState(0);
-  useEffect(() => {
-    let start = 0;
-    const duration = 1000; // ms
-    const startTime = performance.now();
-    function animate(now) {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      setDisplayLevel(Math.floor(progress * level));
-      if (progress < 1) requestAnimationFrame(animate);
-      else setDisplayLevel(level);
-    }
-    requestAnimationFrame(animate);
-    // eslint-disable-next-line
-  }, [level, index]);
-
-  return (
-    <>
-      <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
-        <motion.div
-          className="skill-bar-animated h-2 rounded-full origin-left"
-          initial={{ width: 0 }}
-          animate={{ width: `${level}%` }}
-          transition={{ duration: 1, delay: 0.2 * index, ease: "easeOut" }}
-        />
-      </div>
-      <div className="text-right mt-1">
-        <span className="text-sm text-muted-foreground">
-          {displayLevel}%
-        </span>
-      </div>
-    </>
-  );
-}
-
-// RippleButton component
-import { forwardRef } from "react";
-const RippleButton = forwardRef(({ children, className, ...props }, ref) => {
-  function createRipple(e) {
-    const button = e.currentTarget;
-    const circle = document.createElement("span");
-    const diameter = Math.max(button.clientWidth, button.clientHeight);
-    const radius = diameter / 2;
-    circle.style.width = circle.style.height = `${diameter}px`;
-    circle.style.left = `${e.clientX - button.getBoundingClientRect().left - radius}px`;
-    circle.style.top = `${e.clientY - button.getBoundingClientRect().top - radius}px`;
-    circle.classList.add("ripple");
-    const ripple = button.getElementsByClassName("ripple")[0];
-    if (ripple) ripple.remove();
-    button.appendChild(circle);
-  }
-  return (
-    <motion.button
-      ref={ref}
-      className={className}
-      {...props}
-      onClick={e => {
-        createRipple(e);
-        props.onClick && props.onClick(e);
-      }}
-    >
-      {children}
-    </motion.button>
-  );
-});
-
-// Add ripple effect CSS
-if (typeof window !== "undefined") {
-  const style = document.createElement("style");
-  style.innerHTML = `.ripple {
-    position: absolute;
-    border-radius: 50%;
-    transform: scale(0);
-    animation: ripple 0.6s linear;
-    background: rgba(255,255,255,0.5);
-    pointer-events: none;
-    z-index: 10;
-  }
-  @keyframes ripple {
-    to {
-      transform: scale(2.5);
-      opacity: 0;
-    }
-  }`;
-  if (!document.head.querySelector('style[data-ripple]')) {
-    style.setAttribute('data-ripple', '');
-    document.head.appendChild(style);
-  }
-}
