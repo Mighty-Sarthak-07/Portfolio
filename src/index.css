@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
-@theme {
+/* Enable class-based dark mode for Tailwind v4 */
+@variant dark (&:where(.dark, .dark *));
+
+@theme inline {
   /* Custom xs breakpoint for very small phones (375–475px range) */
   --breakpoint-xs: 475px;
 
@@ -757,4 +760,19 @@
 
 .media-object:hover::before {
   animation-play-state: paused;
+}
+
+/* ── Animated gradient text shift ── */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }

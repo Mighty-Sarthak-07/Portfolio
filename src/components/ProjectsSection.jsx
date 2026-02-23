@@ -6,14 +6,25 @@ import { ViewMore } from "./ViewMore";
 const projects = [
   {
     id: 1,
-    title: "Solo Leveling Animated Website",
-    description: "A beautiful landing page app using React, GSAP and Tailwind. Featuring scroll-triggered animations, immersive visuals, and a cinematic feel inspired by the Solo Leveling universe.",
-    image: "/projects/project1.png",
-    tags: ["React", "TailwindCSS", "GSAP"],
-    demoUrl: "https://solo-leveling-mu.vercel.app/",
-    githubUrl: "https://github.com/Mighty-Sarthak-07/Solo-Leveling",
-    videoUrl: null,
-    type: "webapp"
+  title: "Solo Leveling Animated Website",
+  description: "A beautiful landing page app using React, GSAP and Tailwind. Featuring scroll-triggered animations, immersive visuals, and a cinematic feel inspired by the Solo Leveling universe.",
+  image: "/projects/project1.png",
+  tags: [
+    "React",
+    "TailwindCSS",
+    "GSAP",
+    "ScrollTrigger",
+    "Framer Motion",
+    "Responsive Design",
+    "UI Animation",
+    "Landing Page",
+    "Vercel Deployment",
+    "Modern UI"
+  ],
+  demoUrl: "https://solo-leveling-mu.vercel.app/",
+  githubUrl: "https://github.com/Mighty-Sarthak-07/Solo-Leveling",
+  videoUrl: "https://www.instagram.com/reel/DG8q57aTwWM/?igsh=bWtuZWloejN6eWU0",
+  type: "webapp"
   },
   {
     id: 2,
@@ -24,6 +35,7 @@ const projects = [
     demoUrl: "#",
     githubUrl: "https://github.com/Mighty-Sarthak-07/Podcreator_SK",
     videoUrl: null,
+    linkedinEmbed: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7345531500999688192?compact=1",
     type: "webapp"
   },
   {
@@ -35,6 +47,7 @@ const projects = [
     demoUrl: "#",
     githubUrl: "#",
     videoUrl: null,
+    linkedinEmbed: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7358575237900193794?compact=1",
     type: "webapp"
   },
   {
@@ -195,9 +208,9 @@ export const ProjectsSection = () => {
 
                   {/* Card body */}
                   <div className="p-5 relative z-10">
-                    {/* Tags */}
+                    {/* Tags — show first 3, then "+N more" pill */}
                     <div className="flex flex-wrap gap-1.5 mb-3">
-                      {project.tags.map((tag, index) => (
+                      {project.tags.slice(0, 3).map((tag, index) => (
                         <motion.span
                           key={index}
                           whileHover={{ scale: 1.1, rotate: 2 }}
@@ -206,6 +219,16 @@ export const ProjectsSection = () => {
                           {tag}
                         </motion.span>
                       ))}
+                      {project.tags.length > 3 && (
+                        <motion.button
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.93 }}
+                          onClick={() => setSelectedProject(project)}
+                          className="px-2 py-0.5 text-xs font-bold rounded-full bg-primary/15 text-primary border border-primary/30 hover:bg-primary hover:text-primary-foreground transition-all duration-200"
+                        >
+                          +{project.tags.length - 3} more
+                        </motion.button>
+                      )}
                     </div>
 
                     <h3 className="text-lg font-bold mb-1 text-primary line-clamp-1">{project.title}</h3>

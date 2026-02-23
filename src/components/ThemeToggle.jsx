@@ -2,37 +2,56 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 
-export const ThemeToggle = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+// ─── Helper: read the preferred theme ──────────────────────────────────────
+// Priority: localStorage → OS preference → default "dark"
+function getInitialTheme() {
+  try {
+    const stored = localStorage.getItem("theme");
+    if (stored === "dark" || stored === "light") return stored;
+    // Respect OS preference on first visit
+    if (window.matchMedia("(prefers-color-scheme: light)").matches) return "light";
+  } catch (_) {}
+  return "dark"; // default to dark
+}
 
-  useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "dark") {
-      setIsDarkMode(true);
-      document.documentElement.classList.add("dark");
-    } else {
-      localStorage.setItem("theme", "light");
-      setIsDarkMode(false);
+// ─── Apply the theme class to <html> immediately ───────────────────────────
+function applyTheme(theme) {
+  const root = document.documentElement;
+  if (theme === "dark") {
+    root.classList.add("dark");
+  } else {
+    root.classList.remove("dark");
+  }
+}
+
+export const ThemeToggle = () => {
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    // Initialise from DOM state so there's no flicker on mount
+    if (typeof document !== "undefined") {
+      return document.documentElement.classList.contains("dark");
     }
+    return true;
+  });
+
+  // On mount: resolve the theme and apply it
+  useEffect(() => {
+    const theme = getInitialTheme();
+    applyTheme(theme);
+    localStorage.setItem("theme", theme);
+    setIsDarkMode(theme === "dark");
   }, []);
 
   const toggleTheme = () => {
-    if (isDarkMode) {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-      setIsDarkMode(false);
-    } else {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-      setIsDarkMode(true);
-    }
+    const next = isDarkMode ? "light" : "dark";
+    applyTheme(next);
+    localStorage.setItem("theme", next);
+    setIsDarkMode(next === "dark");
   };
 
   return (
     <motion.button
       onClick={toggleTheme}
-      // Positioned at far right on all screen sizes, well clear of hamburger/nav
-      className="fixed top-3 right-14 md:right-4 lg:right-5 z-50 p-2 rounded-full border border-border/60 bg-card/85 backdrop-blur-md shadow-md hover:shadow-lg hover:border-primary/40 transition-all duration-300"
+      className="fixed top-3 right-14 md:right-4 lg:right-5 z-[60] p-2 rounded-full border border-border/60 bg-card/85 backdrop-blur-md shadow-md hover:shadow-lg hover:border-primary/40 transition-all duration-300"
       aria-label={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.88 }}

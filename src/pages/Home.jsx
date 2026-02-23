@@ -24,9 +24,9 @@ export const Home = () => {
         transition={{ duration: 0.45, ease: "easeInOut" }}
       >
         {/* Fixed overlays */}
-        <ThemeToggle />
         <StarBackground />
         <Navbar />
+        <ThemeToggle />
 
         {/* Page sections */}
         <main>

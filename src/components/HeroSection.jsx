@@ -18,7 +18,7 @@ const socialLinks = [
   { icon: Instagram, href: "https://www.instagram.com/savage_sarthak_07", label: "Instagram" },
 ];
 
-const roles = ["Web Developer", "UI/UX Designer", "Full-Stack Dev"];
+const roles = ["GenAI Builder", "UI/UX Designer", "Full-Stack Developer","SAAS Developer"];
 const roleColors = ["text-violet-500 dark:text-violet-400", "text-pink-500 dark:text-pink-400", "text-emerald-500 dark:text-emerald-400"];
 
 function useParallaxHero(offset = 0.12) {
@@ -163,11 +163,11 @@ export const HeroSection = () => {
               custom={2}
               className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-md lg:max-w-lg leading-relaxed"
             >
-              I craft stellar web experiences with modern technologies — building
-              interfaces that are{" "}
-              <span className="text-primary font-semibold">beautiful</span>,{" "}
-              <span className="text-primary font-semibold">fast</span>, and{" "}
-              <span className="text-primary font-semibold">accessible</span>.
+              I build intelligent, scalable web applications with modern technologies — 
+creating products that are{" "}
+<span className="text-primary font-semibold">responsive</span>,{" "}
+<span className="text-primary font-semibold">fast</span>, and{" "}
+<span className="text-primary font-semibold">scalable</span>.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -249,7 +249,7 @@ export const HeroSection = () => {
               </span>
             </motion.div>
 
-            {/* Floating CGPA badge — only sm+ */}
+            {/* Floating SGPA badge — only sm+ */}
             <motion.div
               className="absolute bottom-2 left-4 sm:-bottom-3 sm:-left-3 md:-bottom-4 md:-left-4 z-20 hidden sm:flex items-center gap-2 bg-card/95 border border-border rounded-xl px-2.5 py-1.5 shadow-lg"
               animate={{ y: [0, 5, 0] }}
@@ -257,7 +257,7 @@ export const HeroSection = () => {
             >
               <span className="text-base sm:text-lg leading-none">⚡</span>
               <div>
-                <div className="text-xs font-bold text-foreground">CGPA 8.83</div>
+                <div className="text-xs font-bold text-foreground">SGPA 8.91</div>
                 <div className="text-[10px] sm:text-xs text-muted-foreground">B.Tech CS</div>
               </div>
             </motion.div>

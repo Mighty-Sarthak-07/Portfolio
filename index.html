@@ -5,6 +5,23 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio</title>
+    <!-- Theme initialisation: runs before React to prevent flash of wrong theme -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          if (stored === 'dark' || stored === 'light') {
+            if (stored === 'dark') document.documentElement.classList.add('dark');
+          } else {
+            // Default to dark; respect OS light preference
+            var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+            if (!prefersLight) document.documentElement.classList.add('dark');
+          }
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

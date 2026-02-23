@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Award, Code2, Coffee, FolderGit2, Palette, Users } from "lucide-react";
+import { Award, BrainCircuit, Code2, Coffee, FolderGit2, Palette, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const fadeUp = {
@@ -12,8 +12,8 @@ const fadeUp = {
 };
 
 const stats = [
-  { icon: FolderGit2, value: 7, suffix: "+", label: "Projects Built" },
-  { icon: Award, value: 8.83, suffix: "", label: "CGPA Score", decimal: true },
+  { icon: FolderGit2, value: 4, suffix: "+", label: "Full Stack Projects Built" },
+  { icon: Award, value: 8.91, suffix: "", label: "SGPA Score", decimal: true },
   { icon: Coffee, value: 500, suffix: "+", label: "Hours Coded" },
   { icon: Users, value: 3, suffix: "+", label: "Collaborations" },
 ];
@@ -51,10 +51,10 @@ const services = [
     gradient: "from-pink-500 to-rose-500",
   },
   {
-    Icon: FolderGit2,
-    title: "Project Management",
-    description: "Leading projects from conception to delivery with agile methodologies and clear communication.",
-    gradient: "from-emerald-500 to-teal-500",
+    Icon: BrainCircuit,
+    title: "AI & Automation",
+    description: "Building intelligent applications using Gemini API, AI workflows, and automation tools like n8n to enhance productivity and user experience.",
+    gradient: "from-blue-500 to-violet-500",
   },
 ];
 

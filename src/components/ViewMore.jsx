@@ -16,14 +16,15 @@
  */
 import { AnimatePresence, motion } from "framer-motion";
 import {
-    ExternalLink,
-    Github,
-    Info,
-    Play,
-    Tag,
-    X,
+  ExternalLink,
+  Github,
+  Info,
+  Linkedin,
+  Play,
+  Tag,
+  X,
 } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 /* ── Tag colour map (5 rotating gradients, same as card chips) ── */
 const tagColors = [
@@ -58,6 +59,8 @@ const panelVariant = {
 };
 
 export const ViewMore = ({ project, onClose }) => {
+  const [showEmbed, setShowEmbed] = useState(false);
+
   /* Lock body scroll while open */
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -73,10 +76,11 @@ export const ViewMore = ({ project, onClose }) => {
 
   if (!project) return null;
 
-  const isWebapp = project.type === "webapp";
-  const hasGithub = project.githubUrl && project.githubUrl !== "#";
-  const hasDemo   = project.demoUrl   && project.demoUrl   !== "#";
-  const hasVideo  = isWebapp && project.videoUrl;
+  const isWebapp     = project.type === "webapp";
+  const hasGithub    = project.githubUrl && project.githubUrl !== "#";
+  const hasDemo      = project.demoUrl   && project.demoUrl   !== "#";
+  const hasVideo     = isWebapp && project.videoUrl;
+  const hasLinkedin  = isWebapp && project.linkedinEmbed;
 
   return (
     <AnimatePresence>
@@ -237,8 +241,9 @@ export const ViewMore = ({ project, onClose }) => {
                       </span>
                     )}
 
-                    {/* Watch Video */}
+                    {/* Watch Video / LinkedIn toggle */}
                     {hasVideo ? (
+                      /* Regular video link — opens in new tab */
                       <motion.a
                         href={project.videoUrl}
                         target="_blank"
@@ -250,7 +255,29 @@ export const ViewMore = ({ project, onClose }) => {
                         <Play size={16} className="fill-current" />
                         Watch Video
                       </motion.a>
+                    ) : hasLinkedin ? (
+                      /* LinkedIn embed toggle button */
+                      <motion.button
+                        onClick={() => setShowEmbed((v) => !v)}
+                        className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all duration-300 ${
+                          showEmbed
+                            ? "border-[#0A66C2] bg-[#0A66C2] text-white shadow-lg shadow-[#0A66C2]/30"
+                            : "border-[#0A66C2] text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white"
+                        }`}
+                        whileHover={{ scale: 1.04 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <motion.span
+                          animate={{ rotate: showEmbed ? 180 : 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <Play size={16} className={showEmbed ? "fill-white" : "fill-current"} />
+                        </motion.span>
+                        {showEmbed ? "Hide Video" : "Watch Video"}
+                        <Linkedin size={14} />
+                      </motion.button>
                     ) : (
+                      /* No video at all */
                       <span
                         className="flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-dashed border-pink-400/40 text-pink-400/60 text-sm font-semibold cursor-not-allowed"
                         title="No demo video available yet"
@@ -284,6 +311,39 @@ export const ViewMore = ({ project, onClose }) => {
                   )
                 )}
               </motion.div>
+
+              {/* ── LinkedIn embed (toggled by Watch Video button) ── */}
+              <AnimatePresence>
+                {showEmbed && hasLinkedin && (
+                  <motion.div
+                    key="linkedin-embed"
+                    className="space-y-2"
+                    initial={{ opacity: 0, height: 0, y: -10 }}
+                    animate={{ opacity: 1, height: "auto", y: 0 }}
+                    exit={{ opacity: 0, height: 0, y: -10 }}
+                    transition={{ duration: 0.35, ease: "easeInOut" }}
+                    style={{ overflow: "hidden" }}
+                  >
+                    <div className="flex items-center gap-2 pt-1">
+                      <Linkedin size={13} className="text-[#0A66C2]" />
+                      <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                        LinkedIn Demo Post
+                      </span>
+                    </div>
+                    <div className="w-full rounded-xl overflow-hidden border border-[#0A66C2]/30 bg-muted/20 shadow-inner">
+                      <iframe
+                        src={project.linkedinEmbed}
+                        height="399"
+                        width="100%"
+                        frameBorder="0"
+                        allowFullScreen
+                        title="LinkedIn Demo Post"
+                        className="block w-full"
+                      />
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </motion.div>
