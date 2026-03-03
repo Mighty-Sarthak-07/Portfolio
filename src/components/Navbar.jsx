@@ -10,6 +10,7 @@ const navItems = [
   { name: "Education", href: "#education" },
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
+  { name: "Certificates", href: "#certificates" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -18,7 +19,6 @@ export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -31,7 +31,6 @@ export const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-      // Active section detection
       const sections = navItems.map((item) => item.href.replace("#", ""));
       const reversed = [...sections].reverse();
       for (const id of reversed) {
@@ -61,7 +60,6 @@ export const Navbar = () => {
       >
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
 
-          {/* ── Logo ── */}
           <a
             href="#hero"
             className="flex-shrink-0 flex items-center gap-0.5 group z-10"
@@ -78,7 +76,6 @@ export const Navbar = () => {
             </span>
           </a>
 
-          {/* ── Desktop Nav (visible only lg+) ── */}
           <div className="hidden lg:flex items-center gap-0.5 xl:gap-1">
             {navItems.map((item, key) => (
               <motion.a
@@ -115,7 +112,6 @@ export const Navbar = () => {
             </motion.a>
           </div>
 
-          {/* ── Tablet Nav (md to lg): compressed icon-less links) ── */}
           <div className="hidden md:flex lg:hidden items-center gap-0.5">
             {navItems.map((item, key) => (
               <motion.a
@@ -144,7 +140,6 @@ export const Navbar = () => {
             </motion.a>
           </div>
 
-          {/* ── Mobile Menu Toggle (< md) ── */}
           <motion.button
             onClick={() => setIsMenuOpen((prev) => !prev)}
             className="md:hidden relative z-50 p-2 rounded-xl text-foreground hover:bg-primary/10 transition-colors duration-200"
@@ -178,11 +173,9 @@ export const Navbar = () => {
         </div>
       </nav>
 
-      {/* ── Mobile Full-Screen Overlay Menu ── */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               key="backdrop"
               initial={{ opacity: 0 }}
@@ -193,7 +186,6 @@ export const Navbar = () => {
               onClick={() => setIsMenuOpen(false)}
             />
 
-            {/* Slide-in drawer */}
             <motion.div
               key="drawer"
               initial={{ x: "100%" }}
@@ -202,7 +194,6 @@ export const Navbar = () => {
               transition={{ type: "spring", damping: 28, stiffness: 240 }}
               className="fixed top-0 right-0 bottom-0 z-50 w-[min(280px,85vw)] bg-background/98 backdrop-blur-2xl shadow-2xl border-l border-border md:hidden flex flex-col"
             >
-              {/* Drawer header */}
               <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-border/60">
                 <a href="#hero" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-0.5">
                   <span className="text-lg font-extrabold tracking-tight text-foreground" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
@@ -218,7 +209,6 @@ export const Navbar = () => {
                 </button>
               </div>
 
-              {/* Nav links */}
               <nav className="flex-1 overflow-y-auto px-4 py-4">
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-3 px-2">
                   Navigation
@@ -248,7 +238,6 @@ export const Navbar = () => {
                 </div>
               </nav>
 
-              {/* Resume button at bottom of drawer */}
               <div className="px-4 pb-6 pt-3 border-t border-border/60">
                 <motion.a
                   href="/resumeSarthak.pdf"

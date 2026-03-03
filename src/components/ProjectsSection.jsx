@@ -6,32 +6,32 @@ import { ViewMore } from "./ViewMore";
 const projects = [
   {
     id: 1,
-  title: "Solo Leveling Animated Website",
-  description: "A beautiful landing page app using React, GSAP and Tailwind. Featuring scroll-triggered animations, immersive visuals, and a cinematic feel inspired by the Solo Leveling universe.",
-  image: "/projects/project1.png",
-  tags: [
-    "React",
-    "TailwindCSS",
-    "GSAP",
-    "ScrollTrigger",
-    "Framer Motion",
-    "Responsive Design",
-    "UI Animation",
-    "Landing Page",
-    "Vercel Deployment",
-    "Modern UI"
-  ],
-  demoUrl: "https://solo-leveling-mu.vercel.app/",
-  githubUrl: "https://github.com/Mighty-Sarthak-07/Solo-Leveling",
-  videoUrl: "https://www.instagram.com/reel/DG8q57aTwWM/?igsh=bWtuZWloejN6eWU0",
-  type: "webapp"
+    title: "Solo Leveling Animated Website",
+    description: "A beautiful landing page app using React, GSAP and Tailwind. Featuring scroll-triggered animations, immersive visuals, and a cinematic feel inspired by the Solo Leveling universe.",
+    image: "/projects/project1.png",
+    tags: [
+      "React",
+      "TailwindCSS",
+      "GSAP",
+      "ScrollTrigger",
+      "Framer Motion",
+      "Responsive Design",
+      "UI Animation",
+      "Landing Page",
+      "Vercel Deployment",
+      "Modern UI"
+    ],
+    demoUrl: "https://solo-leveling-mu.vercel.app/",
+    githubUrl: "https://github.com/Mighty-Sarthak-07/Solo-Leveling",
+    videoUrl: "https://www.instagram.com/reel/DG8q57aTwWM/?igsh=bWtuZWloejN6eWU0",
+    type: "webapp"
   },
   {
     id: 2,
-    title: "Podcreator",
-    description: "PodCreator is a full-stack podcast web application built using React, Express.js, and MongoDB. It allows users to upload, manage, and listen to audio podcasts anytime, anywhere.",
-    image: "/projects/project2.png",
-    tags: ["ReactJs", "Express.js", "MongoDB"],
+    title: "PodCreator – Full-Stack Podcast Streaming Platform",
+    description: "Engineered a full-stack podcast streaming platform using React, Express.js, and MongoDB that enables users to upload, stream, and manage audio content securely. Implemented RESTful APIs for podcast CRUD operations, user authentication, and media handling. Designed responsive UI for seamless playback experience and optimized backend routes for efficient audio delivery and storage management.",
+    image: "/projects/podcreator.png",
+    tags: ["React", "Express.js", "Node.js", "MongoDB", "REST API"],
     demoUrl: "#",
     githubUrl: "https://github.com/Mighty-Sarthak-07/Podcreator_SK",
     videoUrl: null,
@@ -40,24 +40,24 @@ const projects = [
   },
   {
     id: 3,
-    title: "AI Automated E-Learning Platform",
-    description: "A full-featured AI-powered e-learning platform with user authentication, self-paced learning modules, payment & subscription integration. Built with Next.js and Clerk.",
-    image: "/projects/project3.png",
-    tags: ["React", "Next.js", "Clerk"],
-    demoUrl: "#",
-    githubUrl: "#",
+    title: "SkillWorld – AI-Powered SaaS E-Learning Platform",
+    description: "Built a production-ready AI-powered SaaS learning platform that generates structured courses, chapters, and study content using the Gemini API. Implemented secure authentication with Clerk, subscription-based access control, and PostgreSQL (Neon) database integration. Automated dynamic course layouts, AI-generated banner images, and video recommendations via YouTube API. Designed scalable architecture using Next.js App Router with server actions and API routes.",
+    image: "/projects/skillworld.png",
+    tags: ["Next.js", "React", "Gemini API", "Clerk", "PostgreSQL", "Neon", "YouTube API"],
+    demoUrl: "https://ai-online-learning-platform-five.vercel.app/workspace",
+    githubUrl: "https://github.com/Mighty-Sarthak-07/Ai-OnlineLearningPlatform",
     videoUrl: null,
     linkedinEmbed: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7358575237900193794?compact=1",
     type: "webapp"
   },
   {
     id: 4,
-    title: "SpaceX",
-    description: "The SpaceX Landing Page is a visually captivating and modern front-end project that showcases the cutting-edge identity of SpaceX. Features parallax scrolling and immersive animations.",
+    title: "SpaceX Elite – Animated Frontend Experience",
+    description: "Developed a high-performance SpaceX-inspired landing experience using React and Tailwind CSS, featuring parallax scrolling, smooth transitions, and immersive UI animations. Implemented responsive layouts, optimized asset loading, and scroll-triggered effects to deliver a cinematic, modern web experience. Focused on performance, visual hierarchy, and interactive storytelling design.",
     image: "/projects/project7.png",
-    tags: ["React", "Tailwind", "Frontend"],
-    demoUrl: "#",
-    githubUrl: "#",
+    tags: ["React", "Tailwind CSS", "Framer Motion", "Responsive Design"],
+    demoUrl: "https://space-x-elite.vercel.app/",
+    githubUrl: "https://github.com/Mighty-Sarthak-07/SpaceX.Elite",
     videoUrl: null,
     type: "webapp"
   },
@@ -129,7 +129,6 @@ export const ProjectsSection = () => {
           transition={{ duration: 0.5 }}
           className="container mx-auto max-w-7xl"
         >
-          {/* ── Header ── */}
           <div className="text-center mb-10">
             <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
               My Work
@@ -148,7 +147,6 @@ export const ProjectsSection = () => {
             with attention to detail, performance, and user experience.
           </p>
 
-          {/* ── Filter buttons ── */}
           <div className="flex justify-center mb-8 gap-2 sm:gap-4 flex-wrap">
             {filterButtons.map(({ label, value, activeClass }) => (
               <motion.button
@@ -167,7 +165,6 @@ export const ProjectsSection = () => {
             ))}
           </div>
 
-          {/* ── Cards grid ── */}
           <AnimatePresence mode="wait">
             <motion.div
               key={projectType}
@@ -190,7 +187,6 @@ export const ProjectsSection = () => {
                 >
                   <div className="absolute -inset-0.5 z-0 rounded-2xl bg-white/80 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-md" />
 
-                  {/* Image */}
                   <div className="h-48 overflow-hidden relative z-10">
                     <motion.img
                       whileHover={{ scale: 1.08 }}
@@ -199,16 +195,13 @@ export const ProjectsSection = () => {
                       alt={project.title}
                       className="w-full h-full object-cover rounded-t-2xl"
                     />
-                    {/* Hover title overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col justify-end p-4">
                       <h3 className="text-base font-bold text-white mb-0.5 drop-shadow-lg line-clamp-1">{project.title}</h3>
                       <p className="text-xs text-white/80 drop-shadow-md line-clamp-2">{project.description}</p>
                     </div>
                   </div>
 
-                  {/* Card body */}
                   <div className="p-5 relative z-10">
-                    {/* Tags — show first 3, then "+N more" pill */}
                     <div className="flex flex-wrap gap-1.5 mb-3">
                       {project.tags.slice(0, 3).map((tag, index) => (
                         <motion.span
@@ -236,9 +229,7 @@ export const ProjectsSection = () => {
                       {project.description}
                     </p>
 
-                    {/* Action row */}
                     <div className="flex items-center justify-between">
-                      {/* Left: external link + github icons */}
                       <div className="flex items-center gap-3">
                         <motion.a
                           whileHover={{ scale: 1.15 }}
@@ -271,7 +262,6 @@ export const ProjectsSection = () => {
                         )}
                       </div>
 
-                      {/* Right: View More button */}
                       <motion.button
                         whileHover={{ scale: 1.06 }}
                         whileTap={{ scale: 0.92 }}
@@ -288,7 +278,6 @@ export const ProjectsSection = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* ── GitHub CTA ── */}
           <motion.div
             className="text-center mt-12"
             initial={{ opacity: 0, y: 20 }}
@@ -309,7 +298,6 @@ export const ProjectsSection = () => {
         </motion.div>
       </section>
 
-      {/* ── View More modal (rendered at root level via portal-like pattern) ── */}
       <AnimatePresence>
         {selectedProject && (
           <ViewMore

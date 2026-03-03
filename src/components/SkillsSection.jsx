@@ -336,7 +336,7 @@ function SkillCard({ skill, index, inView }) {
       onHoverEnd={() => setHovered(false)}
       whileHover={{ y: -6, scale: 1.03 }}
     >
-      {/* Glow on hover */}
+
       <motion.div
         className="absolute inset-0 rounded-2xl pointer-events-none"
         animate={{
@@ -347,7 +347,7 @@ function SkillCard({ skill, index, inView }) {
         transition={{ duration: 0.3 }}
       />
 
-      {/* Gradient shimmer on hover */}
+
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
         style={{
@@ -356,11 +356,11 @@ function SkillCard({ skill, index, inView }) {
       />
 
       <div className="p-5 relative z-10 flex flex-col gap-4">
-        {/* Top row: icon + category badge */}
+
         <div className="flex items-start justify-between">
-          {/* Icon with animated ring */}
+
           <div className="relative">
-            {/* Animated ring */}
+
             <motion.div
               className="absolute -inset-2 rounded-2xl"
               animate={hovered ? {
@@ -372,7 +372,7 @@ function SkillCard({ skill, index, inView }) {
               }}
               transition={{ duration: 0.3 }}
             />
-            {/* Icon wrapper */}
+
             <div
               className="w-14 h-14 rounded-xl flex items-center justify-center"
               style={{ background: `${skill.accent}18` }}
@@ -389,7 +389,7 @@ function SkillCard({ skill, index, inView }) {
                   e.target.nextSibling && (e.target.nextSibling.style.display = "flex");
                 }}
               />
-              {/* Fallback letter */}
+
               <div
                 className="w-9 h-9 rounded-lg hidden items-center justify-center text-lg font-black"
                 style={{ color: skill.accent, background: `${skill.accent}22` }}
@@ -399,7 +399,7 @@ function SkillCard({ skill, index, inView }) {
             </div>
           </div>
 
-          {/* Category badge */}
+
           <span
             className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${cat.bg} ${cat.text} ${cat.border}`}
           >
@@ -407,7 +407,7 @@ function SkillCard({ skill, index, inView }) {
           </span>
         </div>
 
-        {/* Name + desc */}
+
         <div>
           <h3
             className="font-bold text-base text-foreground mb-0.5 group-hover:text-primary transition-colors duration-300"
@@ -418,7 +418,7 @@ function SkillCard({ skill, index, inView }) {
           <p className="text-xs text-muted-foreground">{skill.desc}</p>
         </div>
 
-        {/* Progress bar */}
+
         <SkillBar level={skill.level} accent={skill.accent} inView={inView} />
       </div>
     </motion.div>
@@ -454,15 +454,15 @@ export const SkillsSection = () => {
 
   return (
     <section id="skills" ref={sectionRef} className="py-28 px-4 relative bg-background overflow-hidden">
-      {/* Top / bottom gradient lines */}
+
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
-      {/* Large bg glow */}
+
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-primary/4 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto max-w-6xl relative z-10">
-        {/* ── Header ── */}
+
         <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
@@ -485,7 +485,7 @@ export const SkillsSection = () => {
           </p>
         </motion.div>
 
-        {/* ── Filter buttons ── */}
+
         <motion.div
           className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10"
           initial={{ opacity: 0, y: 20 }}
@@ -518,7 +518,7 @@ export const SkillsSection = () => {
           ))}
         </motion.div>
 
-        {/* ── Skills grid ── */}
+
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory}
@@ -534,7 +534,7 @@ export const SkillsSection = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* ── Bottom legend ── */}
+
         <motion.div
           className="flex flex-wrap justify-center gap-4 mt-10"
           initial={{ opacity: 0 }}

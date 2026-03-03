@@ -711,6 +711,33 @@
 }
 
 /* ============================================================
+   CERTIFICATE CARDS
+   ============================================================ */
+.cert-glass-card {
+  background: rgba(255, 255, 255, 0.80);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+  border-radius: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.cert-glass-card:hover {
+  box-shadow: 0 20px 60px 0 rgba(80, 0, 200, 0.18);
+}
+
+.dark .cert-glass-card {
+  background: rgba(12, 11, 24, 0.85);
+  border: 1px solid rgba(139, 92, 246, 0.12);
+}
+
+.dark .cert-glass-card:hover {
+  box-shadow: 0 20px 60px 0 rgba(139, 92, 246, 0.22);
+}
+
+/* ============================================================
    FOOTER GRADIENT LINE
    ============================================================ */
 .footer-gradient-line {

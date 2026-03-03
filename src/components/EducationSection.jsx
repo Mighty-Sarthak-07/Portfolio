@@ -40,14 +40,14 @@ const educationData = [
 export const EducationSection = () => {
   return (
     <section id="education" className="py-28 px-4 relative bg-muted/30 overflow-hidden">
-      {/* bg decoration */}
+
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       </div>
 
       <div className="container mx-auto max-w-4xl relative z-10">
-        {/* Header */}
+
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -64,9 +64,9 @@ export const EducationSection = () => {
           <div className="mt-3 mx-auto w-16 h-1 rounded-full bg-gradient-to-r from-primary to-accent" />
         </motion.div>
 
-        {/* Timeline */}
+
         <div className="relative">
-          {/* Vertical line */}
+
           <div className="absolute left-6 sm:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary/20 hidden sm:block" />
 
           <div className="space-y-8">
@@ -79,7 +79,7 @@ export const EducationSection = () => {
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.15, duration: 0.6, ease: "easeOut" }}
               >
-                {/* Timeline dot */}
+
                 <div className="hidden sm:flex flex-col items-center flex-shrink-0 mt-6">
                   <motion.div
                     className="timeline-dot z-10 flex items-center justify-center"
@@ -90,12 +90,12 @@ export const EducationSection = () => {
                   </motion.div>
                 </div>
 
-                {/* Card */}
+
                 <motion.div
                   className="flex-1 group bg-card rounded-2xl p-6 border border-border hover:border-primary/40 shadow-sm hover:shadow-xl transition-all duration-300"
                   whileHover={{ y: -3, scale: 1.005 }}
                 >
-                  {/* Card header */}
+
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1 flex-wrap">

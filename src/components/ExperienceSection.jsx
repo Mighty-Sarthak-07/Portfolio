@@ -63,7 +63,7 @@ export const ExperienceSection = () => {
       id="experience"
       className="py-28 px-4 relative bg-background overflow-hidden"
     >
-      {/* Background decoration */}
+
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
@@ -72,7 +72,7 @@ export const ExperienceSection = () => {
       </div>
 
       <div className="container mx-auto max-w-5xl relative z-10">
-        {/* Header */}
+
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -92,9 +92,9 @@ export const ExperienceSection = () => {
           <div className="mt-3 mx-auto w-16 h-1 rounded-full bg-gradient-to-r from-primary to-accent" />
         </motion.div>
 
-        {/* Timeline */}
+
         <div className="relative">
-          {/* Vertical timeline line */}
+
           <div
             className="absolute left-6 sm:left-8 top-6 bottom-6 w-0.5 hidden sm:block"
             style={{
@@ -113,7 +113,7 @@ export const ExperienceSection = () => {
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.15, duration: 0.6, ease: "easeOut" }}
               >
-                {/* Timeline dot */}
+
                 <div className="hidden sm:flex flex-col items-center flex-shrink-0 mt-6">
                   <motion.div
                     className="z-10 flex items-center justify-center rounded-full text-white flex-shrink-0"
@@ -131,21 +131,21 @@ export const ExperienceSection = () => {
                   </motion.div>
                 </div>
 
-                {/* Card */}
+
                 <motion.div
                   className="flex-1 bg-card rounded-2xl border border-border hover:border-primary/40 shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden group"
                   whileHover={{ y: -4 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
-                  {/* Card top accent bar */}
+
                   <div
                     className={`h-1 w-full bg-gradient-to-r ${exp.logoGradient}`}
                   />
 
                   <div className="p-6 md:p-8">
-                    {/* Header row */}
+
                     <div className="flex flex-col sm:flex-row sm:items-start gap-4 mb-5">
-                      {/* Company logo */}
+
                       <motion.div
                         className={`w-14 h-14 rounded-xl bg-gradient-to-br ${exp.logoGradient} flex items-center justify-center text-white font-black text-lg flex-shrink-0 shadow-lg`}
                         whileHover={{ rotate: 5, scale: 1.05 }}
@@ -153,7 +153,7 @@ export const ExperienceSection = () => {
                         {exp.logo}
                       </motion.div>
 
-                      {/* Role & company info */}
+
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-wrap items-center gap-2 mb-1">
                           <h3
@@ -196,12 +196,12 @@ export const ExperienceSection = () => {
                       </div>
                     </div>
 
-                    {/* Description */}
+
                     <p className="text-sm text-muted-foreground leading-relaxed mb-5">
                       {exp.description}
                     </p>
 
-                    {/* Highlights */}
+
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-5">
                       {exp.highlights.map((h, hi) => (
                         <div key={hi} className="flex items-start gap-2 text-sm text-foreground/80">
@@ -214,7 +214,7 @@ export const ExperienceSection = () => {
                       ))}
                     </div>
 
-                    {/* Skills */}
+
                     <div className="mb-5">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-1 h-4 rounded-full bg-gradient-to-b from-primary to-accent" />
@@ -238,14 +238,14 @@ export const ExperienceSection = () => {
                       </div>
                     </div>
 
-                    {/* Certificate */}
+
                     {exp.certificate && (
                       <motion.div
                         className="border border-border rounded-xl overflow-hidden"
                         whileHover={{ borderColor: "hsl(var(--primary))" }}
                       >
                         <div className="flex items-center gap-4 p-4 bg-muted/30 hover:bg-primary/5 transition-colors duration-300">
-                          {/* Certificate icon */}
+
                           <div
                             className={`w-12 h-12 rounded-lg bg-gradient-to-br ${exp.logoGradient} flex items-center justify-center flex-shrink-0 shadow-md`}
                           >
@@ -281,7 +281,7 @@ export const ExperienceSection = () => {
             ))}
           </div>
 
-          {/* "More coming soon" teaser */}
+
           <motion.div
             className="relative flex gap-4 sm:gap-8 mt-8"
             initial={{ opacity: 0, y: 20 }}

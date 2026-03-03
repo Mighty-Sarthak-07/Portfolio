@@ -25,17 +25,13 @@ const techStack = ["React", "Vite", "TailwindCSS", "Framer Motion", "Three.js"];
 export const Footer = () => {
   return (
     <footer className="relative bg-card border-t border-border overflow-hidden">
-      {/* Gradient top line */}
       <div className="footer-gradient-line" />
 
-      {/* Background decoration */}
       <div className="absolute top-10 right-10 w-72 h-72 bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
       <div className="absolute bottom-0 left-20 w-48 h-48 bg-accent/5 rounded-full blur-[60px] pointer-events-none" />
 
       <div className="container mx-auto max-w-7xl px-4 py-12 relative z-10">
-        {/* Main footer grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
-          {/* Brand column */}
           <motion.div
             className="lg:col-span-2"
             initial={{ opacity: 0, y: 20 }}
@@ -53,7 +49,6 @@ export const Footer = () => {
               A passionate web developer and UI/UX designer creating modern, beautiful, and functional web experiences. Always learning, always building.
             </p>
 
-            {/* Tech stack chips */}
             <div className="flex flex-wrap gap-2 mb-5">
               {techStack.map((tech) => (
                 <span key={tech} className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-primary/8 text-primary border border-primary/15">
@@ -62,7 +57,6 @@ export const Footer = () => {
               ))}
             </div>
 
-            {/* Social icons */}
             <div className="flex gap-3">
               {socialLinks.map(({ icon: Icon, href, label }) => (
                 <motion.a
@@ -82,7 +76,6 @@ export const Footer = () => {
             </div>
           </motion.div>
 
-          {/* Quick links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -107,7 +100,6 @@ export const Footer = () => {
             </ul>
           </motion.div>
 
-          {/* Contact / availability */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -126,7 +118,6 @@ export const Footer = () => {
               <li className="text-sm text-muted-foreground">Uttar Pradesh, India</li>
             </ul>
 
-            {/* Availability */}
             <div className="mt-6 p-3 rounded-xl border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900/10">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse flex-shrink-0" />
@@ -135,13 +126,12 @@ export const Footer = () => {
                 </span>
               </div>
               <p className="text-xs text-green-600 dark:text-green-500 mt-1">
-                Available for internships & freelance projects
+                Available for internships &amp; freelance projects
               </p>
             </div>
           </motion.div>
         </div>
 
-        {/* Bottom bar */}
         <div className="pt-6 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-3">
           <motion.p
             className="text-sm text-muted-foreground flex items-center gap-1.5"

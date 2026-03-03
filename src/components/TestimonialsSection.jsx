@@ -31,14 +31,12 @@ const testimonials = [
 export const TestimonialsSection = () => {
   return (
     <section className="py-24 px-4 relative bg-muted/30 overflow-hidden">
-      {/* decorative blur */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       </div>
 
       <div className="container mx-auto max-w-6xl relative z-10">
-        {/* Header */}
         <motion.div
           className="text-center mb-14"
           initial={{ opacity: 0, y: 30 }}
@@ -58,7 +56,6 @@ export const TestimonialsSection = () => {
           <div className="mt-3 mx-auto w-16 h-1 rounded-full bg-gradient-to-r from-primary to-accent" />
         </motion.div>
 
-        {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
             <motion.div
@@ -70,24 +67,20 @@ export const TestimonialsSection = () => {
               transition={{ delay: i * 0.12, duration: 0.6, ease: "easeOut" }}
               whileHover={{ y: -5 }}
             >
-              {/* quote icon */}
               <div className="absolute top-5 right-5 opacity-10 group-hover:opacity-20 transition-opacity">
                 <Quote size={48} className="text-primary" />
               </div>
 
-              {/* Stars */}
               <div className="flex gap-1 mb-4">
                 {Array.from({ length: t.rating }).map((_, si) => (
                   <Star key={si} size={14} className="text-yellow-400 fill-yellow-400" />
                 ))}
               </div>
 
-              {/* Text */}
               <p className="text-sm text-muted-foreground leading-relaxed mb-6 relative z-10">
                 "{t.text}"
               </p>
 
-              {/* Author */}
               <div className="flex items-center gap-3">
                 <div
                   className={`w-10 h-10 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center text-white text-sm font-bold flex-shrink-0`}

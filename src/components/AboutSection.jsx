@@ -73,7 +73,7 @@ export const AboutSection = () => {
 
   return (
     <section id="about" className="py-28 px-4 relative bg-background overflow-hidden">
-      {/* Decorative bg blur */}
+
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
 
       <motion.div
@@ -82,7 +82,7 @@ export const AboutSection = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        {/* Section Header */}
+
         <motion.div variants={fadeUp} custom={1} className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
             Who I Am
@@ -93,7 +93,7 @@ export const AboutSection = () => {
           <div className="mt-3 mx-auto w-16 h-1 rounded-full bg-gradient-to-r from-primary to-accent" />
         </motion.div>
 
-        {/* Stats Grid */}
+
         <motion.div
           ref={statsRef}
           variants={fadeUp}
@@ -116,9 +116,9 @@ export const AboutSection = () => {
           ))}
         </motion.div>
 
-        {/* Content grid */}
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Bio */}
+
           <div className="space-y-5">
             <motion.h3
               variants={fadeUp}
@@ -137,7 +137,7 @@ export const AboutSection = () => {
               I'm passionate about turning ideas into functional digital solutions and continuously push myself to learn emerging tools and frameworks. Whether it's pixel-perfect front-end design or scalable back-end logic, I strive to build products that make a meaningful impact.
             </motion.p>
 
-            {/* Skills chips */}
+
             <motion.div variants={fadeUp} custom={3.5} className="flex flex-wrap gap-2 pt-2">
               {["React", "Next.js", "TypeScript", "Node.js", "Figma", "MongoDB"].map((tech) => (
                 <span
@@ -163,7 +163,7 @@ export const AboutSection = () => {
             </motion.div>
           </div>
 
-          {/* Service cards */}
+
           <motion.div
             className="grid grid-cols-1 gap-4"
             initial="hidden"

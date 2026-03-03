@@ -113,14 +113,14 @@ export const HeroCanvas = () => {
         gl={{ antialias: true, alpha: true }}
         dpr={[1, 1.5]}
       >
-        {/* ── Lighting ── */}
+
         <ambientLight intensity={0.3} />
         <pointLight position={[4, 6, 4]} intensity={2.5} color="#8b5cf6" />
         <pointLight position={[-4, -4, 2]} intensity={1.5} color="#a78bfa" />
         <pointLight position={[0, 0, 6]} intensity={0.8} color="#ec4899" />
 
         <Suspense fallback={null}>
-          {/* Stars field in the background */}
+
           <Stars
             radius={80}
             depth={50}
@@ -131,7 +131,7 @@ export const HeroCanvas = () => {
             speed={0.6}
           />
 
-          {/* Sparkles effect */}
+
           <Sparkles
             count={80}
             scale={12}
@@ -141,15 +141,15 @@ export const HeroCanvas = () => {
             opacity={0.7}
           />
 
-          {/* Central torus knot — hero centerpiece */}
+
           <TorusKnotMesh />
 
-          {/* Floating icosahedra */}
+
           <Icosahedron position={[-4.5, 1.8, -1]} color="#c084fc" scale={0.7} speed={0.9} />
           <Icosahedron position={[4, -2.5, -1.5]} color="#818cf8" scale={0.55} speed={1.2} />
           <Icosahedron position={[-2, -3, -2.5]} color="#f472b6" scale={0.45} speed={1.4} />
 
-          {/* Floating rings */}
+
           <Ring position={[-4, 2.5, -3]} color="#7c3aed" scale={0.8} />
           <Ring position={[3.5, 2, -4]} color="#6d28d9" scale={0.55} />
         </Suspense>

@@ -198,7 +198,7 @@ export const StatsSection = () => {
 
       <div className="container mx-auto max-w-7xl relative z-10">
 
-        {/* ── Header + Orb ── */}
+
         <div className="flex flex-col lg:flex-row items-center gap-10 mb-16">
           <motion.div className="flex-1 text-center lg:text-left"
             initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }}
@@ -226,21 +226,19 @@ export const StatsSection = () => {
           </motion.div>
         </div>
 
-        {/* ── Stats grid ── */}
+
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-24">
           {stats.map((s) => <StatCard key={s.label} {...s} started={isInView} />)}
         </div>
 
-        {/* ══════════════════════════════════════
-            TECH MARQUEE BAND
-        ══════════════════════════════════════ */}
+
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          {/* Headline */}
+
           <div className="text-center mb-9">
             <motion.p
               className="text-[11px] font-bold text-muted-foreground uppercase tracking-[0.28em] mb-2"
@@ -276,16 +274,12 @@ export const StatsSection = () => {
             />
           </div>
 
-          {/* Dual scrolling rows */}
           <div className="relative">
-            {/* Left / right fade masks */}
             <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
             <div className="absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
             <div className="flex flex-col gap-3">
-              {/* Row 1 — left → right */}
               <MarqueeRow items={techRow1} direction="left"  speed={38} />
-              {/* Row 2 — right → left */}
               <MarqueeRow items={techRow2} direction="right" speed={33} />
             </div>
           </div>

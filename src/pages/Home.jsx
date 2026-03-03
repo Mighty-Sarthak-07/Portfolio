@@ -1,6 +1,7 @@
 import { StarBackground } from "@/components/StarBackground";
 import { AnimatePresence, motion } from "framer-motion";
 import { AboutSection } from "../components/AboutSection";
+import { CertificatesSection } from "../components/CertificatesSection";
 import { ContactSection } from "../components/ContactSection";
 import { EducationSection } from "../components/EducationSection";
 import { ExperienceSection } from "../components/ExperienceSection";
@@ -23,22 +24,21 @@ export const Home = () => {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.45, ease: "easeInOut" }}
       >
-        {/* Fixed overlays */}
         <StarBackground />
         <Navbar />
         <ThemeToggle />
 
-        {/* Page sections */}
         <main>
-          <HeroSection />        {/* 3D canvas bg + typewriter */}
-          <StatsSection />       {/* Animated counters + 3D orb + marquee */}
-          <AboutSection />       {/* Bio + skills chips + service cards */}
-          <ExperienceSection />  {/* Internship timeline */}
-          <EducationSection />   {/* Academic timeline */}
-          <SkillsSection />      {/* 3D skill logos + progress bars */}
-          <ProjectsSection />    {/* Glassmorphic project cards */}
-          <TestimonialsSection />{/* Star-rated testimonial cards */}
-          <ContactSection />     {/* Form + social links */}
+          <HeroSection />
+          <StatsSection />
+          <AboutSection />
+          <ExperienceSection />
+          <EducationSection />
+          <SkillsSection />
+          <ProjectsSection />
+          <CertificatesSection />
+          <TestimonialsSection />
+          <ContactSection />
         </main>
 
         <Footer />

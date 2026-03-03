@@ -28,7 +28,6 @@ function useParallaxHero(offset = 0.12) {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-  // Disable parallax on small screens to avoid layout issues
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
   return () =>
     isMobile
@@ -46,11 +45,9 @@ export const HeroSection = () => {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* ── Background blobs ── */}
       <div className="hero-blob hero-blob-1" />
       <div className="hero-blob hero-blob-2" />
 
-      {/* ── Noise texture ── */}
       <div
         className="absolute inset-0 opacity-[0.015] pointer-events-none"
         style={{
@@ -59,26 +56,16 @@ export const HeroSection = () => {
         }}
       />
 
-      {/* ── Main content wrapper ── */}
       <motion.div
         className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-20 sm:pt-24 pb-16 sm:pb-20 z-10"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
       >
-        {/*
-         * Layout:
-         *  mobile  → single column, text on top, image below
-         *  lg+     → two columns side-by-side
-         */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-10 lg:gap-6 xl:gap-8">
 
-          {/* ════════════════════════════════
-              TEXT COLUMN
-          ════════════════════════════════ */}
           <div className="w-full lg:flex-1 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 sm:space-y-5 lg:space-y-6 max-w-xl lg:max-w-none mx-auto lg:mx-0">
 
-            {/* "Open to Work" badge */}
             <motion.div
               variants={fadeUp}
               custom={0.5}
@@ -88,22 +75,18 @@ export const HeroSection = () => {
               <span>Open to Work &amp; Collaborations</span>
             </motion.div>
 
-            {/* Main heading */}
             <motion.h1
               variants={fadeUp}
               custom={1}
               className="font-black tracking-tight leading-[1.05]"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
-              {/* "Hi, I'm" sub-label */}
               <span className="block text-foreground/55 text-lg sm:text-xl md:text-2xl font-semibold mb-1 tracking-normal">
                 Hi, I'm
               </span>
-              {/* First name */}
               <span className="block text-foreground text-4xl sm:text-5xl md:text-6xl xl:text-7xl">
                 Sarthak
               </span>
-              {/* Last name — typewriter + gradient */}
               <span
                 className="block text-4xl sm:text-5xl md:text-6xl xl:text-7xl"
                 style={{
@@ -126,7 +109,6 @@ export const HeroSection = () => {
               </span>
             </motion.h1>
 
-            {/* Animated role line — wraps gracefully on narrow screens */}
             <motion.div
               variants={fadeUp}
               custom={1.5}
@@ -157,20 +139,18 @@ export const HeroSection = () => {
               </span>
             </motion.div>
 
-            {/* Description */}
             <motion.p
               variants={fadeUp}
               custom={2}
               className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-md lg:max-w-lg leading-relaxed"
             >
-              I build intelligent, scalable web applications with modern technologies — 
-creating products that are{" "}
-<span className="text-primary font-semibold">responsive</span>,{" "}
-<span className="text-primary font-semibold">fast</span>, and{" "}
-<span className="text-primary font-semibold">scalable</span>.
+              I build intelligent, scalable web applications with modern technologies —
+              creating products that are{" "}
+              <span className="text-primary font-semibold">responsive</span>,{" "}
+              <span className="text-primary font-semibold">fast</span>, and{" "}
+              <span className="text-primary font-semibold">scalable</span>.
             </motion.p>
 
-            {/* CTA Buttons */}
             <motion.div
               variants={fadeUp}
               custom={2.5}
@@ -190,7 +170,6 @@ creating products that are{" "}
               </a>
             </motion.div>
 
-            {/* Social icons */}
             <motion.div
               variants={fadeUp}
               custom={3}
@@ -219,15 +198,11 @@ creating products that are{" "}
             </motion.div>
           </div>
 
-          {/* ════════════════════════════════
-              IMAGE COLUMN
-          ════════════════════════════════ */}
           <motion.div
             variants={fadeUp}
             custom={2}
             className="w-full lg:flex-1 relative flex justify-center lg:justify-end"
           >
-            {/* Glow behind image */}
             <div
               className="absolute inset-0 -z-10 rounded-3xl"
               style={{
@@ -237,7 +212,6 @@ creating products that are{" "}
               }}
             />
 
-            {/* Floating "Available" badge — only sm+ to avoid overflow on tiny phones */}
             <motion.div
               className="absolute top-2 right-4 sm:-top-3 sm:-right-3 md:-top-4 md:-right-4 z-20 hidden sm:flex items-center gap-2 bg-card/95 border border-border rounded-xl px-2.5 py-1.5 shadow-lg"
               animate={{ y: [0, -5, 0] }}
@@ -249,7 +223,6 @@ creating products that are{" "}
               </span>
             </motion.div>
 
-            {/* Floating SGPA badge — only sm+ */}
             <motion.div
               className="absolute bottom-2 left-4 sm:-bottom-3 sm:-left-3 md:-bottom-4 md:-left-4 z-20 hidden sm:flex items-center gap-2 bg-card/95 border border-border rounded-xl px-2.5 py-1.5 shadow-lg"
               animate={{ y: [0, 5, 0] }}
@@ -262,7 +235,6 @@ creating products that are{" "}
               </div>
             </motion.div>
 
-            {/* Hero image */}
             <motion.img
               src="/main.png"
               alt="Sarthak Kesarwani"
@@ -281,7 +253,6 @@ creating products that are{" "}
         </div>
       </motion.div>
 
-      {/* ── Scroll indicator ── */}
       <motion.div
         className="absolute bottom-5 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 z-10"
         animate={{ y: [0, -7, 0] }}

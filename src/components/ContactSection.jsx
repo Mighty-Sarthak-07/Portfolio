@@ -96,12 +96,12 @@ export const ContactSection = () => {
       viewport={{ once: true, amount: 0.2 }}
       variants={containerVariants}
     >
-      {/* Background decoration */}
+
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-72 h-72 bg-accent/5 rounded-full blur-[80px] pointer-events-none" />
 
       <div className="container mx-auto max-w-6xl relative z-10">
-        {/* Header */}
+
         <motion.div className="text-center mb-16" variants={itemVariants}>
           <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
             Get In Touch
@@ -116,12 +116,12 @@ export const ContactSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-          {/* Contact Info panel */}
+
           <motion.div
             className="lg:col-span-2 space-y-6"
             variants={containerVariants}
           >
-            {/* Info cards */}
+
             <motion.div variants={itemVariants} className="space-y-4">
               {contactInfo.map(({ icon: Icon, label, value, href }, i) => (
                 <div key={i} className="flex items-center gap-4 p-4 rounded-2xl border border-border bg-card hover:border-primary/30 hover:shadow-md transition-all duration-300">
@@ -142,7 +142,7 @@ export const ContactSection = () => {
               ))}
             </motion.div>
 
-            {/* Social Links */}
+
             <motion.div variants={itemVariants} className="pt-4">
               <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
                 Follow Me
@@ -166,7 +166,7 @@ export const ContactSection = () => {
               </div>
             </motion.div>
 
-            {/* Availability card */}
+
             <motion.div
               variants={itemVariants}
               className="p-5 rounded-2xl border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900/10"
@@ -181,7 +181,7 @@ export const ContactSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Contact Form */}
+
           <motion.div
             className="lg:col-span-3 bg-card rounded-3xl p-8 border border-border shadow-xl"
             variants={itemVariants}
@@ -191,7 +191,7 @@ export const ContactSection = () => {
             </h3>
 
             <form className="space-y-5" onSubmit={handleSubmit}>
-              {/* Name + Email row */}
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold mb-2 text-foreground/80">
@@ -221,7 +221,7 @@ export const ContactSection = () => {
                 </div>
               </div>
 
-              {/* Subject */}
+
               <div>
                 <label htmlFor="subject" className="block text-sm font-semibold mb-2 text-foreground/80">
                   Subject
@@ -235,7 +235,7 @@ export const ContactSection = () => {
                 />
               </div>
 
-              {/* Message */}
+
               <div>
                 <label htmlFor="message" className="block text-sm font-semibold mb-2 text-foreground/80">
                   Message
