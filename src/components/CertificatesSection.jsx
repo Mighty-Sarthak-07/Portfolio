@@ -17,61 +17,91 @@ import { useState } from "react";
 
 const certificates = [
   {
-    id: 1,
-    title: "React – The Complete Guide",
-    issuer: "Udemy",
-    date: "2024",
-    category: "Frontend",
-    description:
-      "Comprehensive React course covering hooks, context, Redux, testing, and modern patterns for building production-grade apps.",
-    file: "/Certificates/reactcertificate.pdf",
-    gradient: "from-[#667eea] to-[#764ba2]",
-    glowColor: "rgba(118, 75, 162, 0.45)",
-    icon: Code2,
-    badgeColor: "bg-violet-500/15 text-violet-400 border-violet-500/30",
-  },
+  id: 1,
+  title: "Front End Web Development Internship",
+  issuer: "Edunet Foundation (IBM SkillsBuild & AICTE Approved)",
+  date: "Aug – Sept 2025",
+  category: "Internship",
+  description:
+    "Completed a 6-week Front End Web Development Internship organized by Edunet Foundation in collaboration with AICTE and IBM SkillsBuild. Gained hands-on experience in modern frontend development, responsive web design, and practical project-based learning.",
+  file: "/Certificates/AICTE B3_PD_2001-3491-651 (1).pdf",
+  gradient: "from-[#f7971e] to-[#ffd200]",
+  glowColor: "rgba(255, 210, 0, 0.38)",
+  icon: Briefcase,
+  badgeColor: "bg-amber-500/15 text-amber-400 border-amber-500/30",
+},
+{
+  id: 2,
+  title: "GenAI Powered Data Analytics",
+  issuer: "TATA (via Forage)",
+  date: "June 2025",
+  category: "AI / Data Analytics",
+  description:
+    "Completed the TATA GenAI Powered Data Analytics Job Simulation on Forage. Gained practical experience in predictive data analysis, risk profiling, AI-powered insights generation, and data storytelling for collections strategy using generative AI techniques.",
+  file: "/Certificates/tata-genai-data-analytics.pdf",
+  gradient: "from-[#4f46e5] to-[#2563eb]",
+  glowColor: "rgba(59, 130, 246, 0.40)",
+  icon: Brain,
+  badgeColor: "bg-blue-500/15 text-blue-400 border-blue-500/30",
+},
   {
-    id: 2,
-    title: "Generative AI Fundamentals",
-    issuer: "Google / Kaggle",
-    date: "2024",
-    category: "AI / ML",
-    description:
-      "Hands-on certification covering large language models, prompt engineering, diffusion models, and responsible AI practices.",
-    file: "/Certificates/GenAI certificate.pdf",
-    gradient: "from-[#f093fb] to-[#f5576c]",
-    glowColor: "rgba(245, 87, 108, 0.40)",
-    icon: Brain,
-    badgeColor: "bg-pink-500/15 text-pink-400 border-pink-500/30",
-  },
+  id: 3,
+  title: "React Certificate",
+  issuer: "LetsUpgrade",
+  date: "February 2025",
+  category: "Frontend Development",
+  description:
+    "Completed intensive React Bootcamp organized by LetsUpgrade covering core React concepts, component architecture, and modern frontend development practices. The program was conducted in collaboration with NSDC, ITM Edutech Training Pvt. Ltd., and GDG MAD.",
+  file: "/Certificates/reactcertificate.pdf",
+  gradient: "from-[#667eea] to-[#764ba2]",
+  glowColor: "rgba(118, 75, 162, 0.45)",
+  icon: Code2,
+  badgeColor: "bg-violet-500/15 text-violet-400 border-violet-500/30",
+},
+  
   {
-    id: 3,
-    title: "Coursera Verified Certificate",
-    issuer: "Coursera",
-    date: "2024",
-    category: "Professional",
-    description:
-      "Industry-recognized credential validating professional skills and theoretical concepts through a structured learning path on Coursera.",
-    file: "/Certificates/Coursera HHLR1JN9HRZX.pdf",
-    gradient: "from-[#4facfe] to-[#00f2fe]",
-    glowColor: "rgba(0, 242, 254, 0.38)",
-    icon: BookOpen,
-    badgeColor: "bg-cyan-500/15 text-cyan-400 border-cyan-500/30",
-  },
-  {
-    id: 4,
-    title: "AICTE Internship Certificate",
-    issuer: "AICTE – All India Council for Technical Education",
-    date: "2024",
-    category: "Internship",
-    description:
-      "Official AICTE-certified internship credential recognizing hands-on industry training and professional development under the government-approved technical education framework.",
-    file: "/Certificates/AICTE B3_PD_2001-3491-651 (1).pdf",
-    gradient: "from-[#f7971e] to-[#ffd200]",
-    glowColor: "rgba(255, 210, 0, 0.38)",
-    icon: Briefcase,
-    badgeColor: "bg-amber-500/15 text-amber-400 border-amber-500/30",
-  },
+  id: 4,
+  title: "Build a Free Website with WordPress",
+  issuer: "Coursera Project Network",
+  date: "June 2025",
+  category: "Web Development",
+  description:
+    "Completed a guided project on Coursera Project Network focused on building and deploying a complete website using WordPress. Gained hands-on experience in website setup, theme customization, page creation, and content management using the WordPress platform.",
+  file: "/Certificates/Coursera HHLR1JN9HRZX.pdf",
+  gradient: "from-[#4facfe] to-[#00f2fe]",
+  glowColor: "rgba(0, 242, 254, 0.38)",
+  icon: BookOpen,
+  badgeColor: "bg-cyan-500/15 text-cyan-400 border-cyan-500/30",
+},
+{
+  id: 5,
+  title: "Credly Verified Digital Badges",
+  issuer: "Credly",
+  date: "Ongoing",
+  category: "Professional Certifications",
+  description:
+    "Earned 67+ verified industry-recognized digital badges across domains such as AI, Cloud Computing, Cybersecurity, Data Analytics, and Software Development. All credentials are publicly verifiable through Credly.",
+  file: "https://www.credly.com/users/sarthak-kesarwani.6e3544fc",
+  gradient: "from-[#f59e0b] to-[#ef4444]",
+  glowColor: "rgba(239, 68, 68, 0.40)",
+  icon: Award,
+  badgeColor: "bg-orange-500/15 text-orange-400 border-orange-500/30",
+},
+{
+  id: 6,
+  title: "5-Day Gen AI Intensive Course",
+  issuer: "Kaggle × Google",
+  date: "2025",
+  category: "Generative AI",
+  description:
+    "Completed the 5-Day Gen AI Intensive Course offered by Kaggle in collaboration with Google. Covered foundational and advanced topics in Generative AI including prompt engineering, embeddings, generative models, AI agents, and MLOps for generative AI applications.",
+  file: "/Certificates/5-Day AI Agents Intensive Course with Google.png",
+  gradient: "from-[#20c997] to-[#12b886]",
+  glowColor: "rgba(32, 201, 151, 0.40)",
+  icon: Brain,
+  badgeColor: "bg-teal-500/15 text-teal-400 border-teal-500/30",
+}
+
 ];
 
 const containerVariants = {
@@ -162,13 +192,22 @@ const CertModal = ({ cert, onClose }) => {
             </div>
 
 
-            <div className="relative" style={{ height: "70vh" }}>
-              <iframe
-                src={cert.file}
-                title={cert.title}
-                className="w-full h-full"
-                style={{ border: "none" }}
-              />
+            <div className="relative flex items-center justify-center bg-black/30" style={{ height: "70vh" }}>
+              {cert.file.match(/\.(png|jpg|jpeg|gif|webp|svg)$/i) ? (
+                <img
+                  src={cert.file}
+                  alt={cert.title}
+                  className="max-w-full max-h-full object-contain"
+                  style={{ padding: "1rem" }}
+                />
+              ) : (
+                <iframe
+                  src={cert.file}
+                  title={cert.title}
+                  className="w-full h-full"
+                  style={{ border: "none" }}
+                />
+              )}
             </div>
           </div>
         </motion.div>
