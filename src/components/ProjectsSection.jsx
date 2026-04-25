@@ -5,10 +5,35 @@ import { ViewMore } from "./ViewMore";
 
 const projects = [
   {
-    id: 1,
+  id: 1,
+  title: "SkyTrip AI Travel Planner",
+  description: "An AI-powered travel planner that generates personalized itineraries using natural language input. Features real-time data, smart booking links, and a modern animated UI.",
+  image: "/projects/Skytrip.png",
+  tags: [
+    "Next.js",
+    "TypeScript",
+    "TailwindCSS",
+    "Gemini API",
+    "OpenRouter",
+    "Convex",
+    "Clerk Auth",
+    "Arcjet Security",
+    "Framer Motion",
+    "AI Integration",
+    "Full Stack",
+    "Responsive Design",
+    "Modern UI"
+  ],
+  demoUrl: "https://sky-trip-ai.vercel.app/",
+  githubUrl: "https://github.com/Mighty-Sarthak-07/SkyTrip---AI-powered-trip-planner",
+  videoUrl: "https://www.youtube.com/watch?v=Fh39-k9W47w",
+  type: "webapp"
+},
+  {
+    id: 2,
     title: "Solo Leveling Animated Website",
     description: "A beautiful landing page app using React, GSAP and Tailwind. Featuring scroll-triggered animations, immersive visuals, and a cinematic feel inspired by the Solo Leveling universe.",
-    image: "/projects/project1.png",
+    image: "/projects/solo.png",
     tags: [
       "React",
       "TailwindCSS",
@@ -27,7 +52,7 @@ const projects = [
     type: "webapp"
   },
   {
-    id: 2,
+    id: 3,
     title: "PodCreator – Full-Stack Podcast Streaming Platform",
     description: "Engineered a full-stack podcast streaming platform using React, Express.js, and MongoDB that enables users to upload, stream, and manage audio content securely. Implemented RESTful APIs for podcast CRUD operations, user authentication, and media handling. Designed responsive UI for seamless playback experience and optimized backend routes for efficient audio delivery and storage management.",
     image: "/projects/podcreator.png",
@@ -39,10 +64,10 @@ const projects = [
     type: "webapp"
   },
   {
-    id: 3,
+    id: 4,
     title: "SkillWorld – AI-Powered SaaS E-Learning Platform",
     description: "Built a production-ready AI-powered SaaS learning platform that generates structured courses, chapters, and study content using the Gemini API. Implemented secure authentication with Clerk, subscription-based access control, and PostgreSQL (Neon) database integration. Automated dynamic course layouts, AI-generated banner images, and video recommendations via YouTube API. Designed scalable architecture using Next.js App Router with server actions and API routes.",
-    image: "/projects/skillworld.png",
+    image: "/projects/skillworld2.png",
     tags: ["Next.js", "React", "Gemini API", "Clerk", "PostgreSQL", "Neon", "YouTube API"],
     demoUrl: "https://ai-online-learning-platform-five.vercel.app/workspace",
     githubUrl: "https://github.com/Mighty-Sarthak-07/Ai-OnlineLearningPlatform",
@@ -51,7 +76,19 @@ const projects = [
     type: "webapp"
   },
   {
-    id: 4,
+  id: 5,
+  title: "Zyro Energy – Cinematic Scrollytelling Product Website",
+  description: "Developed a high-end scrollytelling product website for a beverage brand featuring immersive canvas-based animations and seamless UI transitions. Implemented scroll-controlled image sequence rendering using HTML5 Canvas for a cinematic 3D experience. Built dynamic product switching with real-time state updates, adaptive background gradients, and smooth animations using Framer Motion. Optimized performance with requestAnimationFrame and preloaded assets for a consistent 60fps experience.",
+  image: "/projects/zyro.png",
+  tags: ["Next.js 14", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "HTML5 Canvas"],
+  demoUrl: "https://zyro-in.vercel.app/",
+  githubUrl: "https://github.com/Mighty-Sarthak-07/ZYRO-",
+  videoUrl: null,
+  linkedinEmbed: null,
+  type: "webapp"
+  },
+  {
+    id: 6,
     title: "SpaceX Elite – Animated Frontend Experience",
     description: "Developed a high-performance SpaceX-inspired landing experience using React and Tailwind CSS, featuring parallax scrolling, smooth transitions, and immersive UI animations. Implemented responsive layouts, optimized asset loading, and scroll-triggered effects to deliver a cinematic, modern web experience. Focused on performance, visual hierarchy, and interactive storytelling design.",
     image: "/projects/project7.png",
@@ -62,7 +99,7 @@ const projects = [
     type: "webapp"
   },
   {
-    id: 5,
+    id: 7,
     title: "UrbanNext",
     description: "UrbanNext is a modern and intuitive user interface designed for seamless real estate experiences. Whether you're looking to buy or sell plots, houses, or flats, UrbanNext provides a user-friendly platform with clean design and smooth navigation.",
     image: "/projects/project4.png",
@@ -73,23 +110,12 @@ const projects = [
     type: "uiux"
   },
   {
-    id: 6,
+    id: 8,
     title: "Avadh Foods App",
     description: "Avadh Foods is a sleek and user-friendly mobile/web app designed to deliver a seamless food ordering experience. Inspired by platforms like Zomato and Swiggy, explore menus, and order delicious meals directly to your doorstep.",
     image: "/projects/project5.png",
     tags: ["UI/UX", "Figma"],
     demoUrl: "https://www.figma.com/proto/4wg3fEU8WnqDNwzmOJ2NIh/UI-Kit---Food-App--Community-?node-id=1-36&p=f&t=KebdmOtDe0Qzr5tj-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1",
-    githubUrl: null,
-    videoUrl: null,
-    type: "uiux"
-  },
-  {
-    id: 7,
-    title: "ARTseller",
-    description: "ARTseller is a creative and elegant platform built for artists and art lovers. It enables users to buy, sell, and showcase unique artwork, ranging from paintings and illustrations to digital art and handmade crafts.",
-    image: "/projects/project6.png",
-    tags: ["UI/UX", "Figma"],
-    demoUrl: "https://www.figma.com/design/FE4Ggag6IIAQxFgjQC3vdP/3D-Art-Selling-Website--Figma-UI-UX-Design-Tutorial-for-Beginners--Community-?t=FlfUDC69e1xC1fVS-1",
     githubUrl: null,
     videoUrl: null,
     type: "uiux"
