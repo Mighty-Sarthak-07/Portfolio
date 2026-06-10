@@ -100,7 +100,7 @@ export const Navbar = () => {
               </motion.a>
             ))}
             <motion.a
-              href="/resumeSarthak.pdf"
+              href="/SarthakKesarwaniResume.pdf"
               download
               className="ml-2 flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs xl:text-sm font-semibold bg-primary text-primary-foreground hover:shadow-[0_0_18px_rgba(139,92,246,0.4)] transition-all duration-300"
               whileHover={{ scale: 1.05 }}
@@ -129,7 +129,7 @@ export const Navbar = () => {
               </motion.a>
             ))}
             <motion.a
-              href="/resumeSarthak.pdf"
+              href="/SarthakKesarwaniResume.pdf"
               download
               className="ml-1 flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-semibold bg-primary text-primary-foreground transition-all duration-300"
               whileHover={{ scale: 1.05 }}
@@ -240,7 +240,7 @@ export const Navbar = () => {
 
               <div className="px-4 pb-6 pt-3 border-t border-border/60">
                 <motion.a
-                  href="/resumeSarthak.pdf"
+                  href="/SarthakKesarwaniResume.pdf"
                   download
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}

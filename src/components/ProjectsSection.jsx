@@ -69,7 +69,7 @@ const projects = [
     description: "Built a production-ready AI-powered SaaS learning platform that generates structured courses, chapters, and study content using the Gemini API. Implemented secure authentication with Clerk, subscription-based access control, and PostgreSQL (Neon) database integration. Automated dynamic course layouts, AI-generated banner images, and video recommendations via YouTube API. Designed scalable architecture using Next.js App Router with server actions and API routes.",
     image: "/projects/skillworld2.png",
     tags: ["Next.js", "React", "Gemini API", "Clerk", "PostgreSQL", "Neon", "YouTube API"],
-    demoUrl: "https://ai-online-learning-platform-five.vercel.app/workspace",
+    demoUrl: "https://ai-online-learning-platform-five.vercel.app",
     githubUrl: "https://github.com/Mighty-Sarthak-07/Ai-OnlineLearningPlatform",
     videoUrl: null,
     linkedinEmbed: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7358575237900193794?compact=1",

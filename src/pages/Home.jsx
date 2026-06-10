@@ -11,7 +11,7 @@ import { Navbar } from "../components/Navbar";
 import { ProjectsSection } from "../components/ProjectsSection";
 import { SkillsSection } from "../components/SkillsSection";
 import { StatsSection } from "../components/StatsSection";
-import { TestimonialsSection } from "../components/TestimonialsSection";
+
 import { ThemeToggle } from "../components/ThemeToggle";
 
 export const Home = () => {
@@ -37,7 +37,6 @@ export const Home = () => {
           <SkillsSection />
           <ProjectsSection />
           <CertificatesSection />
-          <TestimonialsSection />
           <ContactSection />
         </main>
 

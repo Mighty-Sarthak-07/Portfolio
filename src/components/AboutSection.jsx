@@ -157,7 +157,7 @@ export const AboutSection = () => {
               <a href="#contact" className="cosmic-button inline-block text-center">
                 Get In Touch
               </a>
-              <a href="/resumeSarthak.pdf" download className="outline-button inline-block text-center">
+              <a href="/SarthakKesarwaniResume.pdf" download className="outline-button inline-block text-center">
                 Download CV
               </a>
             </motion.div>
