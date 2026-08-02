@@ -1,102 +1,79 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Github, Instagram, Linkedin, Sparkles } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 25 },
   visible: (i = 1) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.18, duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: {
+      delay: i * 0.15,
+      duration: 0.55,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
   }),
 };
 
 const socialLinks = [
-  { icon: Github, href: "https://github.com/Mighty-Sarthak-07", label: "GitHub" },
-  { icon: Linkedin, href: "https://www.linkedin.com/in/sarthak-kesarwani-48b4702a7", label: "LinkedIn" },
-  { icon: Instagram, href: "https://www.instagram.com/savage_sarthak_07", label: "Instagram" },
+  {
+    icon: Github,
+    href: "https://github.com/Mighty-Sarthak-07",
+    label: "GitHub",
+  },
+  {
+    icon: Linkedin,
+    href: "https://www.linkedin.com/in/sarthak-kesarwani-48b4702a7",
+    label: "LinkedIn",
+  },
+  {
+    icon: Instagram,
+    href: "https://www.instagram.com/savage_sarthak_07",
+    label: "Instagram",
+  },
 ];
 
-const roles = ["GenAI Builder", "UI/UX Designer", "Full-Stack Developer","SAAS Developer"];
-const roleColors = ["text-violet-500 dark:text-violet-400", "text-pink-500 dark:text-pink-400", "text-emerald-500 dark:text-emerald-400"];
-
-function useParallaxHero(offset = 0.12) {
-  const [scrollY, setScrollY] = useState(0);
-  useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-  return () =>
-    isMobile
-      ? "none"
-      : `translateY(${scrollY * offset}px) scale(${1 + Math.min(scrollY, 300) / 5000})`;
-}
+const roles = [
+  "GenAI Developer",
+  "Full-Stack Engineer",
+  "UI/UX Designer",
+  "SaaS Builder",
+];
 
 export const HeroSection = () => {
-  const parallaxHero = useParallaxHero(0.12);
   const [roleIndex, setRoleIndex] = useState(0);
   const prevWordIndex = useRef(0);
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
+      className="relative min-h-[92vh] flex flex-col items-center justify-center overflow-hidden pt-24 pb-16"
     >
-      <div className="hero-blob hero-blob-1" />
-      <div className="hero-blob hero-blob-2" />
-
-      <div
-        className="absolute inset-0 opacity-[0.015] pointer-events-none"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E\")",
-        }}
-      />
-
-      <motion.div
-        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-20 sm:pt-24 pb-16 sm:pb-20 z-10"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-10 lg:gap-6 xl:gap-8">
-
-          <div className="w-full lg:flex-1 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 sm:space-y-5 lg:space-y-6 max-w-xl lg:max-w-none mx-auto lg:mx-0">
-
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 z-10">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-12">
+          {/* Left Column: Content */}
+          <div className="w-full lg:flex-1 flex flex-col items-center lg:items-start text-center lg:text-left space-y-5 max-w-2xl lg:max-w-none mx-auto lg:mx-0">
             <motion.div
               variants={fadeUp}
               custom={0.5}
-              className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-primary/30 bg-primary/8 text-primary text-xs sm:text-sm font-medium"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs sm:text-sm font-medium tracking-wide"
             >
-              <Sparkles size={13} />
-              <span>Open to Work &amp; Collaborations</span>
+              <Sparkles size={14} className="text-primary animate-pulse" />
+              <span>Available for Full-time Roles &amp; Projects</span>
             </motion.div>
 
             <motion.h1
               variants={fadeUp}
               custom={1}
-              className="font-black tracking-tight leading-[1.05]"
+              className="font-bold tracking-tight leading-[1.08] text-foreground text-4xl sm:text-5xl md:text-6xl xl:text-7xl"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
-              <span className="block text-foreground/55 text-lg sm:text-xl md:text-2xl font-semibold mb-1 tracking-normal">
-                Hi, I'm
+              <span className="block text-muted-foreground text-lg sm:text-xl md:text-2xl font-normal mb-1">
+                Hello, I'm
               </span>
-              <span className="block text-foreground text-4xl sm:text-5xl md:text-6xl xl:text-7xl">
-                Sarthak
-              </span>
-              <span
-                className="block text-4xl sm:text-5xl md:text-6xl xl:text-7xl"
-                style={{
-                  background:
-                    "linear-gradient(135deg, hsl(250,65%,58%), hsl(288,83%,68%), hsl(340,82%,68%))",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
+              <span>Sarthak </span>
+              <span className="text-primary font-extrabold">
                 <Typewriter
                   words={["Kesarwani"]}
                   loop={1}
@@ -114,13 +91,10 @@ export const HeroSection = () => {
               custom={1.5}
               className="flex flex-wrap items-center justify-center lg:justify-start gap-x-2 gap-y-1"
             >
-              <span className="text-sm sm:text-base md:text-lg text-muted-foreground font-medium whitespace-nowrap">
-                A passionate
+              <span className="text-base sm:text-lg text-muted-foreground font-medium">
+                Passionate about building as a
               </span>
-              <span
-                className={`text-base sm:text-lg md:text-xl font-bold transition-colors duration-500 ${roleColors[roleIndex]}`}
-                style={{ minWidth: "10ch" }}
-              >
+              <span className="text-base sm:text-lg md:text-xl font-semibold text-foreground border-b-2 border-primary pb-0.5">
                 <Typewriter
                   words={roles}
                   loop={Infinity}
@@ -129,12 +103,6 @@ export const HeroSection = () => {
                   typeSpeed={65}
                   deleteSpeed={38}
                   delaySpeed={1600}
-                  onType={(char, { wordIndex }) => {
-                    if (prevWordIndex.current !== wordIndex) {
-                      setRoleIndex(wordIndex % roleColors.length);
-                      prevWordIndex.current = wordIndex;
-                    }
-                  }}
                 />
               </span>
             </motion.div>
@@ -142,43 +110,41 @@ export const HeroSection = () => {
             <motion.p
               variants={fadeUp}
               custom={2}
-              className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-md lg:max-w-lg leading-relaxed"
+              className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed font-normal"
             >
-              I build intelligent, scalable web applications with modern technologies —
-              creating products that are{" "}
-              <span className="text-primary font-semibold">responsive</span>,{" "}
-              <span className="text-primary font-semibold">fast</span>, and{" "}
-              <span className="text-primary font-semibold">scalable</span>.
+              Crafting intelligent, scalable web applications with modern
+              technology stacks. Focused on exceptional performance, clean code
+              architecture, and high-quality user experiences.
             </motion.p>
 
             <motion.div
               variants={fadeUp}
               custom={2.5}
-              className="flex flex-col xs:flex-row gap-3 w-full xs:w-auto justify-center lg:justify-start pt-1"
+              className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto pt-2"
             >
               <a
                 href="#projects"
-                className="cosmic-button text-center text-sm sm:text-base px-5 sm:px-7 py-2.5 sm:py-3"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-sm sm:text-base shadow-sm hover:shadow-md hover:bg-primary/90 transition-all duration-200"
               >
-                View My Work
+                Explore Projects
               </a>
               <a
                 href="#contact"
-                className="outline-button text-center text-sm sm:text-base px-5 sm:px-7 py-2.5 sm:py-3"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3 rounded-xl border border-border bg-card/60 text-foreground font-semibold text-sm sm:text-base hover:bg-muted transition-all duration-200"
               >
-                Let's Connect
+                Get in Touch
               </a>
             </motion.div>
 
             <motion.div
               variants={fadeUp}
               custom={3}
-              className="flex items-center gap-3 justify-center lg:justify-start pt-1"
+              className="flex items-center gap-4 pt-3"
             >
-              <span className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">
-                Find me on
+              <span className="text-xs sm:text-sm text-muted-foreground font-medium">
+                Connect:
               </span>
-              <div className="flex gap-2 sm:gap-3">
+              <div className="flex gap-2.5">
                 {socialLinks.map(({ icon: Icon, href, label }) => (
                   <motion.a
                     key={label}
@@ -186,82 +152,89 @@ export const HeroSection = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="social-icon-btn w-9 h-9 sm:w-11 sm:h-11"
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.88 }}
+                    className="w-10 h-10 rounded-xl border border-border/80 bg-card/80 text-foreground/80 hover:text-primary hover:border-primary/40 hover:bg-primary/5 flex items-center justify-center transition-all duration-200 shadow-xs"
+                    whileHover={{ scale: 1.08 }}
+                    whileTap={{ scale: 0.92 }}
                   >
-                    <Icon size={16} className="sm:hidden" />
-                    <Icon size={18} className="hidden sm:block" />
+                    <Icon size={18} />
                   </motion.a>
                 ))}
               </div>
             </motion.div>
           </div>
 
+          {/* Right Column: Hero Visual Card */}
           <motion.div
             variants={fadeUp}
             custom={2}
             className="w-full lg:flex-1 relative flex justify-center lg:justify-end"
           >
-            <div
-              className="absolute inset-0 -z-10 rounded-3xl"
-              style={{
-                background:
-                  "radial-gradient(ellipse at center, rgba(139,92,246,0.22) 0%, transparent 68%)",
-                transform: "scale(1.2)",
-              }}
-            />
+            <div className="relative group">
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-primary/30 to-sky-500/20 opacity-70 blur-xl group-hover:opacity-100 transition duration-500 pointer-events-none" />
 
-            <motion.div
-              className="absolute top-2 right-4 sm:-top-3 sm:-right-3 md:-top-4 md:-right-4 z-20 hidden sm:flex items-center gap-2 bg-card/95 border border-border rounded-xl px-2.5 py-1.5 shadow-lg"
-              animate={{ y: [0, -5, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-              <span className="text-xs font-semibold text-foreground whitespace-nowrap">
-                Available for hire
-              </span>
-            </motion.div>
+              <motion.div
+                className="absolute top-3 right-3 z-20 hidden sm:flex items-center gap-2 bg-card/90 border border-border/80 backdrop-blur-md rounded-xl px-3 py-1.5 shadow-md"
+                animate={{ y: [0, -4, 0] }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                <span className="text-xs font-semibold text-foreground">
+                  Available for Hire
+                </span>
+              </motion.div>
 
-            <motion.div
-              className="absolute bottom-2 left-4 sm:-bottom-3 sm:-left-3 md:-bottom-4 md:-left-4 z-20 hidden sm:flex items-center gap-2 bg-card/95 border border-border rounded-xl px-2.5 py-1.5 shadow-lg"
-              animate={{ y: [0, 5, 0] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-            >
-              <span className="text-base sm:text-lg leading-none">⚡</span>
-              <div>
-                <div className="text-xs font-bold text-foreground">SGPA 8.91</div>
-                <div className="text-[10px] sm:text-xs text-muted-foreground">B.Tech CS</div>
-              </div>
-            </motion.div>
+              <motion.div
+                className="absolute bottom-3 left-3 z-20 hidden sm:flex items-center gap-2.5 bg-card/90 border border-border/80 backdrop-blur-md rounded-xl px-3 py-2 shadow-md"
+                animate={{ y: [0, 4, 0] }}
+                transition={{
+                  duration: 4.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5,
+                }}
+              >
+                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">
+                  CS
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-foreground">
+                    8.91 SGPA
+                  </div>
+                  <div className="text-[11px] text-muted-foreground">
+                    Computer Science
+                  </div>
+                </div>
+              </motion.div>
 
-            <motion.img
-              src="/main.png"
-              alt="Sarthak Kesarwani"
-              className="relative z-10 rounded-2xl sm:rounded-3xl shadow-2xl object-cover
-                         w-48 h-48
-                         xs:w-56 xs:h-56
-                         sm:w-72 sm:h-72
-                         md:w-80 md:h-80
-                         lg:w-full lg:h-auto lg:max-w-sm
-                         xl:max-w-md"
-              style={{ transform: parallaxHero() }}
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.4 }}
-            />
+              <img
+                src="/main.png"
+                alt="Sarthak Kesarwani"
+                className="relative z-10 rounded-2xl border border-border/60 bg-card object-cover
+                           w-56 h-56
+                           xs:w-64 xs:h-64
+                           sm:w-72 sm:h-72
+                           md:w-80 md:h-80
+                           lg:w-[360px] lg:h-[400px]
+                           shadow-xl"
+              />
+            </div>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
 
       <motion.div
-        className="absolute bottom-5 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 z-10"
-        animate={{ y: [0, -7, 0] }}
-        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-10"
+        animate={{ y: [0, -6, 0] }}
+        transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
       >
-        <span className="text-[10px] sm:text-xs text-muted-foreground font-medium tracking-widest uppercase">
-          Scroll
+        <span className="text-[10px] text-muted-foreground font-mono uppercase tracking-widest">
+          Scroll Down
         </span>
-        <ArrowDown className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
+        <ArrowDown className="h-3.5 w-3.5 text-primary/70" />
       </motion.div>
     </section>
   );

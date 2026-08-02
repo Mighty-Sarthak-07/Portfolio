@@ -106,16 +106,17 @@ const certificates = [
 
 const containerVariants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.93 },
+  hidden: { opacity: 0, y: 35, scale: 0.94, filter: "blur(4px)" },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { type: "spring", bounce: 0.35, duration: 0.75 },
+    filter: "blur(0px)",
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
@@ -306,22 +307,22 @@ export const CertificatesSection = () => {
 
 
           <motion.div
-            className="text-center mt-14"
+            className="text-center mt-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.45, duration: 0.5 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
           >
             <motion.a
               href="https://www.linkedin.com/in/sarthak-kesarwani-48b4702a7/"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="cosmic-button inline-flex items-center gap-2"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-sm shadow-xs hover:bg-primary/90 transition-all"
             >
               <Sparkles size={16} />
-              View All on LinkedIn
+              View Credentials on LinkedIn
             </motion.a>
           </motion.div>
         </motion.div>
@@ -337,105 +338,75 @@ export const CertificatesSection = () => {
 
 const CertCard = ({ cert, onPreview }) => {
   const Icon = cert.icon;
-  const [hovered, setHovered] = useState(false);
 
   return (
     <motion.div
       variants={cardVariants}
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
-      className="group relative cert-glass-card rounded-2xl overflow-hidden cursor-pointer"
-      whileHover={{ y: -6, scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      className="group relative rounded-2xl overflow-hidden cursor-pointer border border-border/80 bg-card/80 backdrop-blur-md hover:border-primary/50 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col card-hover-awwward"
+      whileHover={{ y: -6, scale: 1.015 }}
+      whileTap={{ scale: 0.97 }}
     >
+      <div className="flex flex-col flex-1 p-6">
+        <div className="flex items-start justify-between mb-4">
+          <div className="p-3 rounded-xl bg-primary/10 text-primary border border-primary/20">
+            <Icon size={22} />
+          </div>
 
-      <motion.div
-        animate={{ opacity: hovered ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
-        className={`absolute -inset-0.5 rounded-2xl bg-gradient-to-br ${cert.gradient} -z-10`}
-        style={{ filter: "blur(4px)" }}
-      />
-
-
-      <div className="relative z-10 h-full flex flex-col bg-card/90 dark:bg-[#0c0b18]/90 backdrop-blur-xl rounded-2xl border border-white/10 dark:border-white/5 overflow-hidden">
-
-
-        <div className={`h-1.5 w-full bg-gradient-to-r ${cert.gradient}`} />
-
-
-        <div className="flex flex-col flex-1 p-5">
-
-          <div className="flex items-start justify-between mb-5">
-            <div
-              className={`p-3 rounded-xl bg-gradient-to-br ${cert.gradient} shadow-lg`}
-            >
-              <Icon size={22} className="text-white" />
-            </div>
-
-            <div className="flex flex-col items-end gap-2">
-              <span
-                className={`px-2.5 py-0.5 rounded-full text-xs font-semibold border ${cert.badgeColor}`}
-              >
-                {cert.category}
+          <div className="flex flex-col items-end gap-1">
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-secondary text-foreground border border-border">
+              {cert.category}
+            </span>
+            <div className="flex items-center gap-1 mt-1">
+              <Award size={12} className="text-amber-500" />
+              <span className="text-xs text-muted-foreground font-medium">
+                {cert.date}
               </span>
-              <div className="flex items-center gap-1">
-                <Award size={12} className="text-yellow-400" />
-                <span className="text-xs text-muted-foreground font-medium">
-                  {cert.date}
-                </span>
-              </div>
             </div>
           </div>
+        </div>
 
+        <h3
+          className="font-bold text-base sm:text-lg mb-1 leading-snug text-foreground group-hover:text-primary transition-colors"
+          style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+        >
+          {cert.title}
+        </h3>
+        <p className="text-xs sm:text-sm text-primary font-semibold mb-2">
+          {cert.issuer}
+        </p>
+        <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed flex-1">
+          {cert.description}
+        </p>
 
-          <h3
-            className="font-bold text-lg mb-1 leading-snug"
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+        <div className="flex items-center gap-2 mt-5 pt-4 border-t border-border/60">
+          <button
+            onClick={onPreview}
+            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 cursor-pointer"
           >
-            {cert.title}
-          </h3>
-          <p className="text-sm text-primary font-semibold mb-3">
-            {cert.issuer}
-          </p>
-          <p className="text-muted-foreground text-sm leading-relaxed flex-1">
-            {cert.description}
-          </p>
+            <ZoomIn size={14} />
+            Preview
+          </button>
 
+          <a
+            href={cert.file}
+            download
+            className="flex items-center justify-center p-2 rounded-xl text-xs font-semibold border border-border text-muted-foreground hover:text-foreground hover:bg-secondary transition-all duration-200"
+            onClick={(e) => e.stopPropagation()}
+            title="Download Certificate"
+          >
+            <Download size={14} />
+          </a>
 
-          <div className="flex items-center gap-2 mt-5 pt-4 border-t border-border/40">
-            <motion.button
-              whileHover={{ scale: 1.06 }}
-              whileTap={{ scale: 0.92 }}
-              onClick={onPreview}
-              className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-xs font-semibold bg-gradient-to-r ${cert.gradient} text-white shadow-md transition-all duration-200`}
-            >
-              <ZoomIn size={14} />
-              Preview
-            </motion.button>
-
-            <motion.a
-              href={cert.file}
-              download
-              whileHover={{ scale: 1.06 }}
-              whileTap={{ scale: 0.92 }}
-              className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold border border-border/60 text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/5 transition-all duration-200"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Download size={14} />
-            </motion.a>
-
-            <motion.a
-              href={cert.file}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.06 }}
-              whileTap={{ scale: 0.92 }}
-              className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold border border-border/60 text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/5 transition-all duration-200"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ExternalLink size={14} />
-            </motion.a>
-          </div>
+          <a
+            href={cert.file}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center p-2 rounded-xl text-xs font-semibold border border-border text-muted-foreground hover:text-foreground hover:bg-secondary transition-all duration-200"
+            onClick={(e) => e.stopPropagation()}
+            title="Open Certificate Link"
+          >
+            <ExternalLink size={14} />
+          </a>
         </div>
       </div>
     </motion.div>

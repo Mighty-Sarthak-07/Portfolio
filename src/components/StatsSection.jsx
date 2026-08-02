@@ -30,25 +30,24 @@ function useCountUp(target, duration = 1800, start = false) {
 }
 
 /* ─── Stat card ─── */
-function StatCard({ icon: Icon, value, suffix = "+", label, color, delay, started }) {
+function StatCard({ icon: Icon, value, suffix = "+", label, delay, started }) {
   const count = useCountUp(value, 1600, started);
   return (
     <motion.div
-      className="relative flex flex-col items-center gap-2 p-6 rounded-2xl border border-border bg-card/60 backdrop-blur-sm hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 overflow-hidden group"
-      initial={{ opacity: 0, y: 40 }}
+      className="relative flex flex-col items-center gap-2 p-6 rounded-2xl border border-border/80 bg-card/70 backdrop-blur-sm hover:border-primary/40 hover:shadow-lg transition-all duration-300 overflow-hidden group"
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay, duration: 0.6, ease: "easeOut" }}
-      whileHover={{ y: -5, scale: 1.02 }}
+      transition={{ delay, duration: 0.5, ease: "easeOut" }}
+      whileHover={{ y: -4 }}
     >
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{ background: "linear-gradient(135deg,transparent 30%,rgba(139,92,246,0.06) 50%,transparent 70%)" }}
-      />
-      <div className={`p-3 rounded-xl ${color}`}>
-        <Icon size={22} className="text-white" />
+      <div className="p-3 rounded-xl bg-primary/10 text-primary border border-primary/20">
+        <Icon size={22} />
       </div>
-      <div className="text-3xl sm:text-4xl font-black tracking-tight text-foreground"
-        style={{ fontFamily: "'Space Grotesk',sans-serif" }}>
+      <div
+        className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground"
+        style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+      >
         {count}{suffix}
       </div>
       <div className="text-xs sm:text-sm text-muted-foreground font-medium text-center leading-tight">
@@ -68,15 +67,22 @@ function GlowOrb() {
   });
   return (
     <>
-      <ambientLight intensity={0.4} />
-      <pointLight position={[3, 3, 3]} intensity={3} color="#8b5cf6" />
-      <pointLight position={[-3, -2, 2]} intensity={2} color="#ec4899" />
-      <Sparkles count={40} scale={4} size={1.2} speed={0.4} color="#a78bfa" opacity={0.8} />
+      <ambientLight intensity={0.5} />
+      <pointLight position={[3, 3, 3]} intensity={2.5} color="#3b82f6" />
+      <pointLight position={[-3, -2, 2]} intensity={1.5} color="#f59e0b" />
+      <Sparkles count={30} scale={4} size={1.2} speed={0.4} color="#60a5fa" opacity={0.6} />
       <Float speed={1.8} rotationIntensity={0.5} floatIntensity={1.4}>
         <mesh ref={ref}>
           <sphereGeometry args={[1.3, 64, 64]} />
-          <MeshDistortMaterial color="#7c3aed" distort={0.5} speed={2}
-            roughness={0} metalness={1} emissive="#4c1d95" emissiveIntensity={0.5} />
+          <MeshDistortMaterial
+            color="#2563eb"
+            distort={0.45}
+            speed={2}
+            roughness={0.1}
+            metalness={0.8}
+            emissive="#1e3a8a"
+            emissiveIntensity={0.4}
+          />
         </mesh>
       </Float>
     </>
@@ -85,14 +91,14 @@ function GlowOrb() {
 
 /* ─── Stats data ─── */
 const stats = [
-  { icon: Code2,     value: 15,   suffix: "+", label: "Projects Built",       color: "bg-violet-500",  delay: 0 },
-  { icon: GitBranch, value: 500,  suffix: "+", label: "GitHub Commits",        color: "bg-indigo-500",  delay: 0.1 },
-  { icon: Clock,     value: 1200, suffix: "+", label: "Hours Coded",           color: "bg-pink-500",    delay: 0.2 },
-  { icon: Layers,    value: 8,    suffix: "+", label: "Technologies Mastered", color: "bg-emerald-500", delay: 0.3 },
-  { icon: Award,     value: 2,    suffix: "",  label: "Certifications",        color: "bg-amber-500",   delay: 0.4 },
-  { icon: Star,      value: 891,  suffix: "",  label: "SGPA Score (× 100)",    color: "bg-cyan-500",    delay: 0.5 },
-  { icon: Users,     value: 5,    suffix: "+", label: "Collaborations",        color: "bg-rose-500",    delay: 0.6 },
-  { icon: Zap,       value: 100,  suffix: "%", label: "Passion for Learning",  color: "bg-fuchsia-500", delay: 0.7 },
+  { icon: Code2,     value: 15,   suffix: "+", label: "Projects Built",       delay: 0 },
+  { icon: GitBranch, value: 500,  suffix: "+", label: "GitHub Commits",        delay: 0.1 },
+  { icon: Clock,     value: 1200, suffix: "+", label: "Hours Coded",           delay: 0.2 },
+  { icon: Layers,    value: 8,    suffix: "+", label: "Technologies Mastered", delay: 0.3 },
+  { icon: Award,     value: 2,    suffix: "",  label: "Certifications",        delay: 0.4 },
+  { icon: Star,      value: 8.91, suffix: "",  label: "SGPA Score",            delay: 0.5 },
+  { icon: Users,     value: 5,    suffix: "+", label: "Collaborations",        delay: 0.6 },
+  { icon: Zap,       value: 100,  suffix: "%", label: "Passion for Code",      delay: 0.7 },
 ];
 
 /* ─── Tech rows — Row 1: Frontend + Tools ─── */

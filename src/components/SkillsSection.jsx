@@ -458,75 +458,71 @@ export const SkillsSection = () => {
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
-
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-primary/4 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto max-w-6xl relative z-10">
 
         <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          className="text-center mb-14"
+          initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
-            Technical Expertise
+          <span className="inline-block px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider mb-3">
+            04. Technical Stack
           </span>
           <h2
-            className="text-4xl md:text-5xl font-black tracking-tight"
+            className="text-3xl md:text-5xl font-extrabold tracking-tight text-foreground"
             style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
             My <span className="text-primary">Skills</span>
           </h2>
-          <div className="mt-3 mx-auto w-16 h-1 rounded-full bg-gradient-to-r from-primary to-accent" />
-          <p className="mt-4 text-muted-foreground text-sm max-w-xl mx-auto">
-            Technologies and tools I use to bring ideas to life — from pixel-perfect UIs to scalable backends and AI-powered applications.
+          <motion.div
+            className="mt-3 mx-auto h-1 rounded-full bg-primary"
+            initial={{ width: 0 }}
+            whileInView={{ width: 48 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          />
+          <p className="mt-4 text-muted-foreground text-xs sm:text-sm max-w-xl mx-auto">
+            Technologies and tools I use to bring ideas to life — from pixel-perfect UIs to scalable backends and AI applications.
           </p>
         </motion.div>
-
 
         <motion.div
           className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.5 }}
+          transition={{ delay: 0.15, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
           {categories.map((cat) => (
             <motion.button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              whileHover={{ scale: 1.06 }}
-              whileTap={{ scale: 0.93 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               className={cn(
-                "px-4 sm:px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 border relative overflow-hidden",
+                "px-4 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 border cursor-pointer",
                 activeCategory === cat
-                  ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/25"
-                  : "bg-card border-border text-muted-foreground hover:border-primary/40 hover:text-primary"
+                  ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/20"
+                  : "bg-card/80 backdrop-blur-md border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
               )}
             >
               {filterLabels[cat]}
-              {activeCategory === cat && (
-                <motion.div
-                  layoutId="activeFilter"
-                  className="absolute inset-0 bg-primary -z-10 rounded-full"
-                  transition={{ type: "spring", bounce: 0.3, duration: 0.5 }}
-                />
-              )}
             </motion.button>
           ))}
         </motion.div>
-
 
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
             {filtered.map((skill, i) => (
               <SkillCard key={skill.name} skill={skill} index={i} inView={inView} />

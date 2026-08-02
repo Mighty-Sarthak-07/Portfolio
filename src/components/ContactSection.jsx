@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { FaDiscord } from "react-icons/fa6";
+import { SectionCanvas } from "./SectionCanvas";
 
 const socialLinks = [
   {
@@ -62,12 +63,12 @@ const contactInfo = [
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
 };
 
 const itemVariants = {
-  hidden: { y: 30, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 100, damping: 15 } },
+  hidden: { y: 35, opacity: 0, filter: "blur(4px)" },
+  visible: { y: 0, opacity: 1, filter: "blur(0px)", transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 };
 
 export const ContactSection = () => {
@@ -96,6 +97,7 @@ export const ContactSection = () => {
       viewport={{ once: true, amount: 0.2 }}
       variants={containerVariants}
     >
+      <SectionCanvas color="#3b82f6" count={80} />
 
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-72 h-72 bg-accent/5 rounded-full blur-[80px] pointer-events-none" />
@@ -103,14 +105,20 @@ export const ContactSection = () => {
       <div className="container mx-auto max-w-6xl relative z-10">
 
         <motion.div className="text-center mb-16" variants={itemVariants}>
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
-            Get In Touch
+          <span className="inline-block px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider mb-3">
+            06. Get In Touch
           </span>
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-foreground" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             Let's <span className="text-primary">Connect</span>
           </h2>
-          <div className="mt-3 mx-auto w-16 h-1 rounded-full bg-gradient-to-r from-primary to-accent" />
-          <p className="text-muted-foreground mt-5 max-w-xl mx-auto text-base leading-relaxed">
+          <motion.div
+            className="mt-3 mx-auto h-1 rounded-full bg-primary"
+            initial={{ width: 0 }}
+            whileInView={{ width: 48 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          />
+          <p className="text-muted-foreground mt-4 max-w-xl mx-auto text-xs sm:text-sm leading-relaxed">
             Have a project in mind or want to collaborate? Feel free to reach out — I'm always open to exciting new opportunities!
           </p>
         </motion.div>
@@ -124,40 +132,44 @@ export const ContactSection = () => {
 
             <motion.div variants={itemVariants} className="space-y-4">
               {contactInfo.map(({ icon: Icon, label, value, href }, i) => (
-                <div key={i} className="flex items-center gap-4 p-4 rounded-2xl border border-border bg-card hover:border-primary/30 hover:shadow-md transition-all duration-300">
-                  <div className="p-2.5 rounded-xl bg-primary/10 flex-shrink-0">
-                    <Icon className="h-5 w-5 text-primary" />
+                <motion.div
+                  key={i}
+                  whileHover={{ y: -3, scale: 1.015 }}
+                  className="flex items-center gap-4 p-4 rounded-2xl border border-border/80 bg-card/80 backdrop-blur-md hover:border-primary/50 shadow-xs transition-all duration-300 card-hover-awwward"
+                >
+                  <div className="p-2.5 rounded-xl bg-primary/10 text-primary border border-primary/20 flex-shrink-0">
+                    <Icon className="h-5 w-5" />
                   </div>
                   <div>
-                    <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{label}</div>
+                    <div className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">{label}</div>
                     {href ? (
-                      <a href={href} className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                      <a href={href} className="text-xs sm:text-sm font-medium text-foreground hover:text-primary transition-colors">
                         {value}
                       </a>
                     ) : (
-                      <div className="text-sm font-medium text-foreground">{value}</div>
+                      <div className="text-xs sm:text-sm font-medium text-foreground">{value}</div>
                     )}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </motion.div>
 
 
-            <motion.div variants={itemVariants} className="pt-4">
-              <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
-                Follow Me
+            <motion.div variants={itemVariants} className="pt-2">
+              <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+                Social Profiles
               </h4>
-              <div className="flex gap-3 flex-wrap">
-                {socialLinks.map(({ icon: Icon, href, label, color }) => (
+              <div className="flex gap-2.5 flex-wrap">
+                {socialLinks.map(({ icon: Icon, href, label }) => (
                   <motion.a
                     key={label}
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className={`social-icon-btn ${color} hover:text-white hover:border-transparent`}
-                    whileHover={{ scale: 1.15, y: -3 }}
-                    whileTap={{ scale: 0.9 }}
+                    className="w-10 h-10 rounded-xl border border-border/80 bg-card/80 backdrop-blur-md text-foreground/80 hover:text-primary hover:border-primary/40 hover:bg-primary/10 flex items-center justify-center transition-all duration-300 shadow-xs"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.92 }}
                     title={label}
                   >
                     <Icon size={18} />
@@ -165,36 +177,22 @@ export const ContactSection = () => {
                 ))}
               </div>
             </motion.div>
-
-
-            <motion.div
-              variants={itemVariants}
-              className="p-5 rounded-2xl border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900/10"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
-                <div>
-                  <div className="text-sm font-bold text-green-700 dark:text-green-400">Available for Opportunities</div>
-                  <div className="text-xs text-green-600 dark:text-green-500">Open to internships, freelance & part-time roles</div>
-                </div>
-              </div>
-            </motion.div>
           </motion.div>
 
 
           <motion.div
-            className="lg:col-span-3 bg-card rounded-3xl p-8 border border-border shadow-xl"
+            className="lg:col-span-3 bg-card/80 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-border/80 shadow-xs hover:border-primary/40 transition-all duration-300"
             variants={itemVariants}
           >
-            <h3 className="text-2xl font-bold mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            <h3 className="text-xl font-bold mb-6 text-foreground" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
               Send a Message
             </h3>
 
-            <form className="space-y-5" onSubmit={handleSubmit}>
+            <form className="space-y-4" onSubmit={handleSubmit}>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-semibold mb-2 text-foreground/80">
+                  <label htmlFor="name" className="block text-xs font-semibold mb-1.5 text-foreground/80">
                     Your Name
                   </label>
                   <input
@@ -202,12 +200,12 @@ export const ContactSection = () => {
                     id="name"
                     name="name"
                     required
-                    className="w-full px-4 py-3 rounded-xl border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 text-sm"
+                    className="w-full px-4 py-2.5 rounded-xl border border-border bg-background/80 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all duration-200 text-xs sm:text-sm"
                     placeholder="Sarthak Kesarwani"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-semibold mb-2 text-foreground/80">
+                  <label htmlFor="email" className="block text-xs font-semibold mb-1.5 text-foreground/80">
                     Your Email
                   </label>
                   <input
@@ -215,7 +213,7 @@ export const ContactSection = () => {
                     id="email"
                     name="email"
                     required
-                    className="w-full px-4 py-3 rounded-xl border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 text-sm"
+                    className="w-full px-4 py-2.5 rounded-xl border border-border bg-background/80 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all duration-200 text-xs sm:text-sm"
                     placeholder="hey@gmail.com"
                   />
                 </div>
@@ -223,29 +221,29 @@ export const ContactSection = () => {
 
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-semibold mb-2 text-foreground/80">
+                <label htmlFor="subject" className="block text-xs font-semibold mb-1.5 text-foreground/80">
                   Subject
                 </label>
                 <input
                   type="text"
                   id="subject"
                   name="subject"
-                  className="w-full px-4 py-3 rounded-xl border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 text-sm"
+                  className="w-full px-4 py-2.5 rounded-xl border border-border bg-background/80 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all duration-200 text-xs sm:text-sm"
                   placeholder="Project Collaboration / Job Offer / Question"
                 />
               </div>
 
 
               <div>
-                <label htmlFor="message" className="block text-sm font-semibold mb-2 text-foreground/80">
+                <label htmlFor="message" className="block text-xs font-semibold mb-1.5 text-foreground/80">
                   Message
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   required
-                  rows={5}
-                  className="w-full px-4 py-3 rounded-xl border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 resize-none text-sm"
+                  rows={4}
+                  className="w-full px-4 py-2.5 rounded-xl border border-border bg-background/80 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all duration-200 resize-none text-xs sm:text-sm"
                   placeholder="Hello Sarthak! I'd love to discuss..."
                 />
               </div>
@@ -253,9 +251,9 @@ export const ContactSection = () => {
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                className="cosmic-button w-full flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
-                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-                whileTap={{ scale: isSubmitting ? 1 : 0.97 }}
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-xs sm:text-sm shadow-md hover:shadow-primary/25 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70 btn-shine-effect"
               >
                 {isSubmitting ? (
                   <>
@@ -264,8 +262,8 @@ export const ContactSection = () => {
                   </>
                 ) : (
                   <>
+                    <Send size={15} />
                     Send Message
-                    <Send size={16} />
                   </>
                 )}
               </motion.button>

@@ -187,45 +187,45 @@
    ============================================================ */
 @layer base {
   :root {
-    --background: 220 30% 97%;
-    --foreground: 224 47% 11%;
+    --background: 240 10% 98%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 224 47% 11%;
+    --card-foreground: 222 47% 11%;
 
-    --primary: 250 65% 58%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 46%;
 
-    --accent: 262 83% 68%;
+    --accent: 38 92% 50%;
     --accent-foreground: 0 0% 100%;
 
-    --border: 220 13% 88%;
-    --input: 220 13% 88%;
-    --ring: 250 65% 58%;
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 221 83% 53%;
   }
 
   .dark {
-    --background: 224 30% 5%;
-    --foreground: 215 25% 92%;
+    --background: 224 32% 6%;
+    --foreground: 210 40% 98%;
 
-    --card: 224 28% 9%;
-    --card-foreground: 215 25% 92%;
+    --card: 222 30% 10%;
+    --card-foreground: 210 40% 98%;
 
-    --primary: 252 80% 68%;
-    --primary-foreground: 215 25% 92%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 224 32% 6%;
 
-    --muted: 224 20% 14%;
-    --muted-foreground: 215 15% 60%;
+    --muted: 217 19% 15%;
+    --muted-foreground: 215 15% 65%;
 
-    --accent: 262 83% 72%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 38 92% 50%;
+    --accent-foreground: 224 32% 6%;
 
-    --border: 224 20% 18%;
-    --input: 224 20% 18%;
-    --ring: 252 80% 68%;
+    --border: 217 19% 18%;
+    --input: 217 19% 18%;
+    --ring: 217 91% 60%;
   }
 
   * {
@@ -494,33 +494,63 @@
 }
 
 .tag-chip-animated {
-  transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s;
-  box-shadow: 0 2px 8px 0 rgba(139, 92, 246, 0.10);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid transparent;
 }
 
 .tag-chip-colorful-0 {
-  background: linear-gradient(90deg, #667eea, #764ba2);
-  color: #fff;
+  background: rgba(99, 102, 241, 0.08);
+  color: #4f46e5;
+  border-color: rgba(99, 102, 241, 0.2);
+}
+.dark .tag-chip-colorful-0 {
+  background: rgba(99, 102, 241, 0.15);
+  color: #a5b4fc;
+  border-color: rgba(99, 102, 241, 0.3);
 }
 
 .tag-chip-colorful-1 {
-  background: linear-gradient(90deg, #f7971e, #ffd200);
-  color: #222;
+  background: rgba(168, 85, 247, 0.08);
+  color: #7e22ce;
+  border-color: rgba(168, 85, 247, 0.2);
+}
+.dark .tag-chip-colorful-1 {
+  background: rgba(168, 85, 247, 0.15);
+  color: #d8b4fe;
+  border-color: rgba(168, 85, 247, 0.3);
 }
 
 .tag-chip-colorful-2 {
-  background: linear-gradient(90deg, #43e97b, #38f9d7);
-  color: #222;
+  background: rgba(14, 165, 233, 0.08);
+  color: #0369a1;
+  border-color: rgba(14, 165, 233, 0.2);
+}
+.dark .tag-chip-colorful-2 {
+  background: rgba(14, 165, 233, 0.15);
+  color: #7dd3fc;
+  border-color: rgba(14, 165, 233, 0.3);
 }
 
 .tag-chip-colorful-3 {
-  background: linear-gradient(90deg, #fa709a, #fee140);
-  color: #222;
+  background: rgba(16, 185, 129, 0.08);
+  color: #047857;
+  border-color: rgba(16, 185, 129, 0.2);
+}
+.dark .tag-chip-colorful-3 {
+  background: rgba(16, 185, 129, 0.15);
+  color: #6ee7b7;
+  border-color: rgba(16, 185, 129, 0.3);
 }
 
 .tag-chip-colorful-4 {
-  background: linear-gradient(90deg, #4facfe, #00f2fe);
-  color: #222;
+  background: rgba(245, 158, 11, 0.08);
+  color: #b45309;
+  border-color: rgba(245, 158, 11, 0.2);
+}
+.dark .tag-chip-colorful-4 {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fcd34d;
+  border-color: rgba(245, 158, 11, 0.3);
 }
 
 /* ============================================================
@@ -802,4 +832,50 @@
   100% {
     background-position: 0% 50%;
   }
+}
+
+/* ============================================================
+   AWWARDS-GRADE ANIMATION & SHADOW UTILITIES
+   ============================================================ */
+.ease-out-quint {
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine-effect::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 70%
+  );
+  transform: rotate(30deg) translateX(-100%);
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-shine-effect:hover::after {
+  transform: rotate(30deg) translateX(100%);
+}
+
+.card-hover-awwward {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.card-hover-awwward:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 20px 40px -15px rgba(139, 92, 246, 0.15);
+}
+
+.dark .card-hover-awwward:hover {
+  box-shadow: 0 20px 40px -15px rgba(139, 92, 246, 0.25);
 }

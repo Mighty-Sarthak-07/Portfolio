@@ -124,17 +124,17 @@ const projects = [
 
 const cardStagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.13 } },
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
 };
 const cardAnim = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.35, duration: 0.7 } },
+  hidden: { opacity: 0, y: 35, scale: 0.94, filter: "blur(4px)" },
+  visible: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 };
 
 const filterButtons = [
-  { label: "All Projects", value: "all",   activeClass: "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white shadow-lg" },
-  { label: "Web Apps",     value: "webapp", activeClass: "bg-gradient-to-r from-yellow-400 via-pink-500 to-red-500 text-white shadow-lg" },
-  { label: "UI / UX",     value: "uiux",   activeClass: "bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 text-white shadow-lg" },
+  { label: "All Projects", value: "all" },
+  { label: "Web Apps",     value: "webapp" },
+  { label: "UI / UX",     value: "uiux" },
 ];
 
 export const ProjectsSection = () => {
@@ -147,44 +147,49 @@ export const ProjectsSection = () => {
 
   return (
     <>
-      <section id="projects" className="py-28 px-4 relative bg-muted/30 overflow-hidden">
+      <section id="projects" className="py-28 px-4 relative bg-background overflow-hidden">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="container mx-auto max-w-7xl"
         >
           <div className="text-center mb-10">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
-              My Work
+            <span className="inline-block px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider mb-3">
+              05. Featured Work
             </span>
             <h2
-              className="text-4xl md:text-5xl font-black tracking-tight"
+              className="text-3xl md:text-5xl font-extrabold tracking-tight text-foreground"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
               Featured <span className="text-primary">Projects</span>
             </h2>
-            <div className="mt-3 mx-auto w-16 h-1 rounded-full bg-gradient-to-r from-primary to-accent" />
+            <motion.div
+              className="mt-3 mx-auto h-1 rounded-full bg-primary"
+              initial={{ width: 0 }}
+              whileInView={{ width: 48 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            />
           </div>
 
-          <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto text-sm sm:text-base">
-            Here are some of my recent projects. Each project was carefully crafted
-            with attention to detail, performance, and user experience.
+          <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto text-xs sm:text-sm leading-relaxed">
+            Here are selected full-stack applications, GenAI implementations, and UI designs built with performance and clean architecture in mind.
           </p>
 
-          <div className="flex justify-center mb-8 gap-2 sm:gap-4 flex-wrap">
-            {filterButtons.map(({ label, value, activeClass }) => (
+          <div className="flex justify-center mb-10 gap-2 sm:gap-3 flex-wrap">
+            {filterButtons.map(({ label, value }) => (
               <motion.button
                 key={value}
-                whileHover={{ scale: 1.06 }}
-                whileTap={{ scale: 0.96 }}
                 onClick={() => setProjectType(value)}
-                className={`px-4 sm:px-5 py-2 rounded-full font-semibold shadow-md text-sm transition-all duration-300 border-2 border-transparent
-                  ${projectType === value
-                    ? activeClass
-                    : "bg-secondary text-secondary-foreground hover:bg-primary/10 hover:text-primary hover:border-primary/20"
-                  }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`px-4 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 border cursor-pointer ${
+                  projectType === value
+                    ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/20"
+                    : "bg-card/80 backdrop-blur-md border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                }`}
               >
                 {label}
               </motion.button>
@@ -194,7 +199,7 @@ export const ProjectsSection = () => {
           <AnimatePresence mode="wait">
             <motion.div
               key={projectType}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
               variants={cardStagger}
               initial="hidden"
               animate="visible"
@@ -206,17 +211,13 @@ export const ProjectsSection = () => {
                   key={project.id}
                   layout
                   variants={cardAnim}
-                  whileHover={{ scale: 1.04, boxShadow: "0 12px 40px rgba(80,0,200,0.14)" }}
-                  whileTap={{ scale: 0.98 }}
-                  style={{ perspective: 800 }}
-                  className="group relative bg-card rounded-2xl overflow-hidden shadow-lg border-0 project-glass-card"
+                  whileHover={{ y: -7, scale: 1.015 }}
+                  className="group relative bg-card/80 backdrop-blur-md rounded-2xl overflow-hidden border border-border/80 hover:border-primary/50 shadow-xs hover:shadow-xl transition-all duration-400 flex flex-col card-hover-awwward"
                 >
-                  <div className="absolute -inset-0.5 z-0 rounded-2xl bg-white/80 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-md" />
-
-                  <div className="h-48 overflow-hidden relative z-10">
+                  <div className="h-48 overflow-hidden relative z-10 bg-muted/40">
                     <motion.img
                       whileHover={{ scale: 1.08 }}
-                      transition={{ duration: 0.4 }}
+                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                       src={project.image}
                       alt={project.title}
                       className="w-full h-full object-cover rounded-t-2xl"
@@ -232,18 +233,19 @@ export const ProjectsSection = () => {
                       {project.tags.slice(0, 3).map((tag, index) => (
                         <motion.span
                           key={index}
-                          whileHover={{ scale: 1.1, rotate: 2 }}
-                          className={`px-2 py-0.5 text-xs font-semibold rounded-full shadow-sm tag-chip-animated tag-chip-colorful-${index % 5}`}
+                          whileHover={{ y: -1.5, scale: 1.05 }}
+                          className={`px-2.5 py-0.5 text-xs font-medium rounded-lg shadow-2xs tag-chip-animated tag-chip-colorful-${index % 5} flex items-center gap-1 cursor-default`}
                         >
+                          <span className="w-1 h-1 rounded-full bg-current opacity-60" />
                           {tag}
                         </motion.span>
                       ))}
                       {project.tags.length > 3 && (
                         <motion.button
-                          whileHover={{ scale: 1.1 }}
+                          whileHover={{ scale: 1.06, y: -1 }}
                           whileTap={{ scale: 0.93 }}
                           onClick={() => setSelectedProject(project)}
-                          className="px-2 py-0.5 text-xs font-bold rounded-full bg-primary/15 text-primary border border-primary/30 hover:bg-primary hover:text-primary-foreground transition-all duration-200"
+                          className="px-2.5 py-0.5 text-xs font-semibold rounded-lg bg-primary/10 text-primary border border-primary/25 hover:bg-primary hover:text-primary-foreground transition-all duration-200"
                         >
                           +{project.tags.length - 3} more
                         </motion.button>

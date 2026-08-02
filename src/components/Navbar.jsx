@@ -102,9 +102,9 @@ export const Navbar = () => {
             <motion.a
               href="/SarthakKesarwaniResume.pdf"
               download
-              className="ml-2 flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs xl:text-sm font-semibold bg-primary text-primary-foreground hover:shadow-[0_0_18px_rgba(139,92,246,0.4)] transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="ml-2 flex-shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-full text-xs xl:text-sm font-semibold bg-primary text-primary-foreground shadow-sm hover:shadow-md hover:shadow-primary/20 transition-all duration-300"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
               <Download size={13} />

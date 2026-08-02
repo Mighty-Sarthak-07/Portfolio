@@ -10,12 +10,13 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const tagColors = [
-  "bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white",
-  "bg-gradient-to-r from-[#f7971e] to-[#ffd200] text-gray-900",
-  "bg-gradient-to-r from-[#43e97b] to-[#38f9d7] text-gray-900",
-  "bg-gradient-to-r from-[#fa709a] to-[#fee140] text-gray-900",
-  "bg-gradient-to-r from-[#4facfe] to-[#00f2fe] text-gray-900",
+const tagStyles = [
+  "bg-indigo-500/10 text-indigo-600 dark:text-indigo-300 border-indigo-500/25 hover:bg-indigo-500/20 hover:border-indigo-500/40 hover:shadow-indigo-500/10",
+  "bg-purple-500/10 text-purple-600 dark:text-purple-300 border-purple-500/25 hover:bg-purple-500/20 hover:border-purple-500/40 hover:shadow-purple-500/10",
+  "bg-sky-500/10 text-sky-600 dark:text-sky-300 border-sky-500/25 hover:bg-sky-500/20 hover:border-sky-500/40 hover:shadow-sky-500/10",
+  "bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 border-emerald-500/25 hover:bg-emerald-500/20 hover:border-emerald-500/40 hover:shadow-emerald-500/10",
+  "bg-amber-500/10 text-amber-600 dark:text-amber-300 border-amber-500/25 hover:bg-amber-500/20 hover:border-amber-500/40 hover:shadow-amber-500/10",
+  "bg-rose-500/10 text-rose-600 dark:text-rose-300 border-rose-500/25 hover:bg-rose-500/20 hover:border-rose-500/40 hover:shadow-rose-500/10",
 ];
 
 const overlayVariant = {
@@ -131,29 +132,45 @@ export const ViewMore = ({ project, onClose }) => {
               </motion.div>
 
               <motion.div
-                className="space-y-2"
+                className="space-y-3"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.24 }}
               >
                 <div className="flex items-center gap-2">
-                  <Tag size={13} className="text-primary" />
-                  <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                  <Tag size={14} className="text-primary" />
+                  <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
                     Technologies Used
                   </span>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <motion.div
+                  className="flex flex-wrap gap-2"
+                  initial="hidden"
+                  animate="show"
+                  variants={{
+                    hidden: { opacity: 0 },
+                    show: {
+                      opacity: 1,
+                      transition: { staggerChildren: 0.04, delayChildren: 0.26 },
+                    },
+                  }}
+                >
                   {project.tags.map((tag, i) => (
                     <motion.span
                       key={i}
-                      className={`px-3 py-1 rounded-full text-xs font-semibold shadow-sm ${tagColors[i % tagColors.length]}`}
-                      whileHover={{ scale: 1.1, rotate: 2 }}
-                      transition={{ type: "spring", stiffness: 400 }}
+                      variants={{
+                        hidden: { opacity: 0, y: 8, scale: 0.92 },
+                        show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 350, damping: 25 } },
+                      }}
+                      whileHover={{ y: -2, scale: 1.05 }}
+                      whileTap={{ scale: 0.96 }}
+                      className={`px-3 py-1 rounded-lg text-xs font-medium border transition-all duration-200 shadow-2xs flex items-center gap-1.5 cursor-default ${tagStyles[i % tagStyles.length]}`}
                     >
+                      <span className="w-1.5 h-1.5 rounded-full bg-current opacity-70" />
                       {tag}
                     </motion.span>
                   ))}
-                </div>
+                </motion.div>
               </motion.div>
 
               <div className="h-px w-full bg-border" />

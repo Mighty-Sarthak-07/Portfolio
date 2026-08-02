@@ -57,7 +57,7 @@ export const Footer = () => {
               ))}
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex gap-2.5">
               {socialLinks.map(({ icon: Icon, href, label }) => (
                 <motion.a
                   key={label}
@@ -65,9 +65,9 @@ export const Footer = () => {
                   target={href !== "#" ? "_blank" : undefined}
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="social-icon-btn"
-                  whileHover={{ scale: 1.12, y: -2 }}
-                  whileTap={{ scale: 0.9 }}
+                  className="w-9 h-9 rounded-xl border border-border/80 bg-card text-foreground/80 hover:text-primary hover:border-primary/40 hover:bg-primary/5 flex items-center justify-center transition-all duration-200 shadow-xs"
+                  whileHover={{ scale: 1.08 }}
+                  whileTap={{ scale: 0.92 }}
                   title={label}
                 >
                   <Icon size={16} />

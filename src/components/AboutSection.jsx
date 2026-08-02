@@ -1,13 +1,15 @@
 import { motion } from "framer-motion";
 import { Award, BrainCircuit, Code2, Coffee, FolderGit2, Palette, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { SectionCanvas } from "./SectionCanvas";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 35, filter: "blur(4px)" },
   visible: (i = 1) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.15, duration: 0.6, ease: "easeOut" },
+    filter: "blur(0px)",
+    transition: { delay: i * 0.12, duration: 0.7, ease: [0.16, 1, 0.3, 1] },
   }),
 };
 
@@ -73,6 +75,7 @@ export const AboutSection = () => {
 
   return (
     <section id="about" className="py-28 px-4 relative bg-background overflow-hidden">
+      <SectionCanvas color="#8b5cf6" count={90} />
 
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
 
@@ -84,13 +87,19 @@ export const AboutSection = () => {
       >
 
         <motion.div variants={fadeUp} custom={1} className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
-            Who I Am
+          <span className="inline-block px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider mb-3">
+            01. Who I Am
           </span>
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             About <span className="text-primary">Me</span>
           </h2>
-          <div className="mt-3 mx-auto w-16 h-1 rounded-full bg-gradient-to-r from-primary to-accent" />
+          <motion.div
+            className="mt-3 mx-auto h-1 rounded-full bg-primary"
+            initial={{ width: 0 }}
+            whileInView={{ width: 48 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          />
         </motion.div>
 
 
@@ -103,15 +112,15 @@ export const AboutSection = () => {
           {stats.map(({ icon: Icon, value, suffix, label, decimal }, i) => (
             <motion.div
               key={i}
-              className="stat-card"
-              whileHover={{ y: -6 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              className="p-5 rounded-2xl border border-border/80 bg-card/70 backdrop-blur-sm text-center hover:border-primary/40 transition-all duration-300 shadow-xs card-hover-awwward"
+              whileHover={{ y: -6, scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 350, damping: 22 }}
             >
-              <Icon className="h-7 w-7 text-primary mx-auto mb-2" />
-              <div className="text-3xl font-black text-foreground" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              <Icon className="h-6 w-6 text-primary mx-auto mb-2" />
+              <div className="text-2xl sm:text-3xl font-bold text-foreground" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                 <CountUp target={value} suffix={suffix} decimal={decimal} inView={inView} />
               </div>
-              <div className="text-sm text-muted-foreground mt-1">{label}</div>
+              <div className="text-xs text-muted-foreground mt-1 font-medium">{label}</div>
             </motion.div>
           ))}
         </motion.div>
@@ -123,43 +132,55 @@ export const AboutSection = () => {
             <motion.h3
               variants={fadeUp}
               custom={2}
-              className="text-2xl md:text-3xl font-bold"
+              className="text-2xl md:text-3xl font-bold text-foreground"
             >
-              Passionate Web Developer &amp;{" "}
-              <span className="text-primary">Tech Designer</span>
+              Passionate Full-Stack &amp;{" "}
+              <span className="text-primary">GenAI Engineer</span>
             </motion.h3>
 
-            <motion.p variants={fadeUp} custom={2.5} className="text-muted-foreground text-base leading-relaxed">
-              With a strong foundation in web development and hands-on experience in building real-world projects, I specialize in creating clean, responsive, and user-focused web applications using modern technologies.
+            <motion.p variants={fadeUp} custom={2.5} className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+              With a strong foundation in modern web development and hands-on experience building production-ready applications, I specialize in crafting fast, accessible, and user-centric digital experiences.
             </motion.p>
 
-            <motion.p variants={fadeUp} custom={3} className="text-muted-foreground text-base leading-relaxed">
-              I'm passionate about turning ideas into functional digital solutions and continuously push myself to learn emerging tools and frameworks. Whether it's pixel-perfect front-end design or scalable back-end logic, I strive to build products that make a meaningful impact.
+            <motion.p variants={fadeUp} custom={3} className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+              I'm passionate about exploring emerging AI architectures, LLM integrations, and robust full-stack systems. Whether designing clean frontend interfaces or engineering scalable APIs, I prioritize clarity, performance, and impact.
             </motion.p>
 
 
             <motion.div variants={fadeUp} custom={3.5} className="flex flex-wrap gap-2 pt-2">
-              {["React", "Next.js", "TypeScript", "Node.js", "Figma", "MongoDB"].map((tech) => (
-                <span
+              {["React", "Next.js", "TypeScript", "Node.js", "Express", "MongoDB", "Gemini API"].map((tech) => (
+                <motion.span
                   key={tech}
-                  className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-white transition-all duration-200 cursor-default"
+                  whileHover={{ y: -2, scale: 1.05 }}
+                  className="px-3 py-1 rounded-lg text-xs font-semibold bg-secondary/80 text-foreground border border-border hover:border-primary/40 hover:bg-primary/10 transition-all duration-200 cursor-default"
                 >
                   {tech}
-                </span>
+                </motion.span>
               ))}
             </motion.div>
 
             <motion.div
               variants={fadeUp}
               custom={4}
-              className="flex flex-col sm:flex-row gap-3 pt-4"
+              className="flex flex-col sm:flex-row gap-3.5 pt-4"
             >
-              <a href="#contact" className="cosmic-button inline-block text-center">
+              <motion.a
+                href="#contact"
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.96 }}
+                className="inline-flex items-center justify-center px-6 py-2.5 rounded-xl bg-primary text-primary-foreground font-semibold text-sm shadow-md hover:shadow-primary/25 transition-all duration-300 btn-shine-effect"
+              >
                 Get In Touch
-              </a>
-              <a href="/SarthakKesarwaniResume.pdf" download className="outline-button inline-block text-center">
-                Download CV
-              </a>
+              </motion.a>
+              <motion.a
+                href="/SarthakKesarwaniResume.pdf"
+                download
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.96 }}
+                className="inline-flex items-center justify-center px-6 py-2.5 rounded-xl border border-border bg-card/80 backdrop-blur-md text-foreground font-semibold text-sm hover:bg-muted hover:border-primary/40 transition-all duration-300"
+              >
+                Download Resume
+              </motion.a>
             </motion.div>
           </div>
 
@@ -170,21 +191,21 @@ export const AboutSection = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            {services.map(({ Icon, title, description, gradient }, idx) => (
+            {services.map(({ Icon, title, description }, idx) => (
               <motion.div
                 key={idx}
                 variants={fadeUp}
                 custom={idx + 1.5}
-                className="group rounded-2xl border border-border bg-card p-5 hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-                whileHover={{ scale: 1.01 }}
+                className="group rounded-2xl border border-border/80 bg-card/80 backdrop-blur-md p-5 hover:border-primary/50 transition-all duration-300 shadow-xs hover:shadow-lg card-hover-awwward"
+                whileHover={{ y: -4, scale: 1.015 }}
               >
                 <div className="flex items-start gap-4">
-                  <div className={`p-3 rounded-xl bg-gradient-to-br ${gradient} shadow-lg`}>
-                    <Icon className="h-5 w-5 text-white" />
+                  <div className="p-3 rounded-xl bg-primary/10 text-primary border border-primary/20 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+                    <Icon className="h-5 w-5" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-bold text-base mb-1 group-hover:text-primary transition-colors">{title}</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
+                    <h4 className="font-bold text-base mb-1 group-hover:text-primary transition-colors text-foreground">{title}</h4>
+                    <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">{description}</p>
                   </div>
                 </div>
               </motion.div>
